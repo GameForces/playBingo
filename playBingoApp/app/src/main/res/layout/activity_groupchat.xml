@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".groupchat"
+    android:background="#000000"
+    >
+
+    <LinearLayout
+        android:id="@+id/groupchattop"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#000000"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Global Chat"
+            android:textStyle="bold"
+            android:textColor="#ffffff"
+            android:textSize="50dp"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:fontFamily="cursive"
+            >
+
+        </TextView>
+    </LinearLayout>
+    <ListView
+        android:layout_below="@+id/groupchattop"
+        android:layout_width="match_parent"
+        android:id="@+id/messageListView"
+        android:layout_weight="2"
+        android:divider="#fff"
+        android:transcriptMode="normal"
+        android:verticalScrollbarPosition="right"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/groupchatbot"
+        />
+    <LinearLayout
+        android:id="@+id/groupchatbot"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#000000"
+        >
+        <EditText
+            android:id="@+id/groupMessage"
+            android:background="@drawable/border"
+            android:layout_width="350dp"
+            android:layout_height="50dp"
+            android:scrollbarSize="5dp"
+            android:textColor="#ffffff"
+            android:screenReaderFocusable="true"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            />
+        <ImageButton
+            android:id="@+id/sendgrpmessage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/sendmessage"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

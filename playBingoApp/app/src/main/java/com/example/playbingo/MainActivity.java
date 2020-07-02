@@ -21,6 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URISyntaxException;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -106,6 +107,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }, 20000);
 
+            }
+        });
+
+
+        ChatRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,groupchat.class);
+                i.putExtra("username",username);
+                startActivity(i);
             }
         });
 
