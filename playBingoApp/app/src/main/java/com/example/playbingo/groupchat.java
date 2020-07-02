@@ -48,11 +48,21 @@ public class groupchat extends AppCompatActivity {
 
 
         uniqueId = UUID.randomUUID().toString();
-
         username= getIntent().getStringExtra("username");
 
         sendMsg=(ImageButton)findViewById(R.id.sendgrpmessage);
         typedmessage=(EditText)findViewById(R.id.groupMessage);
+
+
+
+        messageListView = findViewById(R.id.messageListView);
+
+        List<MessageFormat> messageFormatList = new ArrayList<>();
+        messageAdapter = new MessageAdapter(groupchat.this, R.layout.item_message, messageFormatList);
+        messageListView.setAdapter(messageAdapter);
+
+
+
 
 
         sendMsg.setOnClickListener(new View.OnClickListener() {
@@ -74,11 +84,6 @@ public class groupchat extends AppCompatActivity {
         });
 
         mSocket.on("grpmsg",onMssg);
-        messageListView = findViewById(R.id.messageListView);
-
-        List<MessageFormat> messageFormatList = new ArrayList<>();
-        messageAdapter = new MessageAdapter(groupchat.this, R.layout.item_message, messageFormatList);
-        messageListView.setAdapter(messageAdapter);
 
 
 

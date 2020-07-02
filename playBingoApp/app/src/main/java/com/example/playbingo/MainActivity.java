@@ -111,6 +111,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        PlayWithFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,playwithfriends.class);
+                i.putExtra("username",username);
+                startActivity(i);
+            }
+        });
+
+
         ChatRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
 
 
     }

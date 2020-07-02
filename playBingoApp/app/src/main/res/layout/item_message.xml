@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
+        android:textColor="#ffffff"
         android:textAppearance="?android:attr/textAppearanceSmall"
         tools:text="Name" />
 
@@ -36,7 +37,7 @@
             android:layout_centerHorizontal="true"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:visibility="gone"
-            tools:text="Name" />
+            tools:text="Name"/>
     </RelativeLayout>
 
 </LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".playwithfriends"
+    android:background="#000000"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#ffffff"
+            android:textAllCaps="false"
+            android:text="Send Request to your friends"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:layout_marginTop="30dp"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/friends_username"
+        android:layout_centerInParent="true"
+        android:textSize="25dp"
+        android:textColor="#ffffff"
+        android:text="for connection Both users should invite each other within 20 sec"
+        android:layout_marginBottom="30dp"
+        />
+    <EditText
+        android:id="@+id/friends_username"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:hint="friends username"
+        android:textColorHint="#ffffff"
+        android:background="@drawable/border"
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Invite friend"
+        android:layout_below="@id/friends_username"
+        android:id="@+id/send_friends_username"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/border2"
+        android:padding="10dp"
+        android:textSize="20dp"
+        />
+</RelativeLayout>
