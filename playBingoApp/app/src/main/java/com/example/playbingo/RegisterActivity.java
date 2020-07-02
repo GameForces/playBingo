@@ -127,7 +127,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             UserDatabase db = new UserDatabase(RegisterActivity.this);
             db.addUser(name,pass);
-
             Intent i = new Intent(RegisterActivity.this,MainActivity.class);
             startActivity(i);
 
