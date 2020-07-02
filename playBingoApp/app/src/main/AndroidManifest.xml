@@ -11,18 +11,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".playwithfriends"></activity>
         <activity android:name=".groupchat" />
         <activity android:name=".onlinegame" />
+=======
+        <activity android:name=".groupchat"></activity>
+        <activity android:name=".onlinegame"></activity>
+>>>>>>> 4ca65ca21713d9135a4e23c4ff46cc8a30d176d9
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
