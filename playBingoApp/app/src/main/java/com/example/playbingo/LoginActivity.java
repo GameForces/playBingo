@@ -127,6 +127,9 @@ public class LoginActivity extends AppCompatActivity {
             UserDatabase db = new UserDatabase(LoginActivity.this);
             db.addUser(name,pass);
 
+            Intent i = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(i);
+
         }
     };
     private Emitter.Listener onfailed = new Emitter.Listener() {
