@@ -52,18 +52,15 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(MainActivity.this,RegisterActivity.class);
             startActivity(i);
         }
-        else
-        {
-            LayoutInflater inflater = getLayoutInflater();
-            View layout = inflater.inflate(R.layout.custum_toast, null);
-            TextView text = (TextView) layout.findViewById(R.id.meage);
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custum_toast, null);
+        TextView text = (TextView) layout.findViewById(R.id.meage);
 
-            text.setText("Welcome "+username);
-            Toast toast = new Toast(MainActivity.this);
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setView(layout);
-            toast.show();
-        }
+        text.setText("Welcome "+username);
+        Toast toast = new Toast(MainActivity.this);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(layout);
+        toast.show();
 
         mSocket.on("LetsPlay",OnPaired);
 
