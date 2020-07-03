@@ -138,7 +138,9 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
 
+                    Toast.makeText(MainActivity.this,"hii"+args[0].toString(),Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,onlinegame.class);
+                    i.putExtra("turn",args[0].toString());
                     startActivity(i);
                 }
             });

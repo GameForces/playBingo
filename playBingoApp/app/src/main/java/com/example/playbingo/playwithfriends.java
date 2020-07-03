@@ -117,7 +117,9 @@ public class playwithfriends extends AppCompatActivity {
                 @Override
                 public void run() {
 
-                    Intent i = new Intent(playwithfriends.this,onlinegame.class);
+                    Toast.makeText(playwithfriends.this,"hii"+args[0].toString(),Toast.LENGTH_SHORT).show();
+                     Intent i = new Intent(playwithfriends.this,onlinegame.class);
+                    i.putExtra("turn",args[0].toString());
                     startActivity(i);
                 }
             });

@@ -14,6 +14,8 @@
         <activity android:name=".groupchat"></activity>
         <activity android:name=".onlinegame"></activity>
         <activity android:name=".LoginActivity" />
+
+        <activity android:name=".playwithfriends" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
