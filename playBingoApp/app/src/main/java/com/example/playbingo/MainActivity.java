@@ -2,6 +2,7 @@ package com.example.playbingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Application;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 import java.net.URISyntaxException;
 import java.util.UUID;
 
+
 public class MainActivity extends AppCompatActivity {
 
     private String username;
@@ -31,18 +33,18 @@ public class MainActivity extends AppCompatActivity {
     private TextView ChatRoom;
     private Socket mSocket;
 
-    {
-        try {
-            mSocket = IO.socket("https://obscure-reaches-99859.herokuapp.com/");
-        } catch (URISyntaxException e) {}
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Initializefields();
+
+        RatKiller app = (RatKiller)getApplication();
+        mSocket = app.getmSocket();
+
+        if (mSocket.connected()){
+            Toast.makeText(MainActivity.this, "Connected!!",Toast.LENGTH_SHORT).show();
+        }
 
         UserDatabase db = new UserDatabase(MainActivity.this);
         username = db.getcurrentuser();
@@ -67,12 +69,10 @@ public class MainActivity extends AppCompatActivity {
         PlayOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mSocket.connect();
 
 
                 JSONObject info = new JSONObject();
                 try {
-                    mSocket.connect();
                     info.put("username", username);
 
                     mSocket.emit("playOnlineRequest",info);} catch (JSONException e) {
@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
 
     private Emitter.Listener OnPaired = new Emitter.Listener() {
         @Override
