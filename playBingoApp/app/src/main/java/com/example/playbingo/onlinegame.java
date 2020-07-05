@@ -61,7 +61,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onlinegame);
-        e+=1;
 
         intializedfields();
 
@@ -134,11 +133,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-    }
 
     private Emitter.Listener onlose = new Emitter.Listener() {
         @Override
@@ -148,6 +142,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 public void run() {
                     Toast.makeText(onlinegame.this, "YOU LOSE", Toast.LENGTH_SHORT).show();
                     mturn = false;
+                    e=0;
                     finishAndRemoveTask();
                 }
 
@@ -163,6 +158,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 public void run() {
                     Toast.makeText(onlinegame.this, "YOU WIN", Toast.LENGTH_SHORT).show();
                     mturn = false;
+                    e=0;
                     finishAndRemoveTask();
 
                 }
@@ -259,7 +255,9 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         {
                             e.printStackTrace();
                         }
-                        msocket.emit("playerw",info1);
+                        if(e==1) {
+                            msocket.emit("playerw", info1);
+                        }
                         int cnt = 0;
                         for (int i = 0; i < 5; i++) {
                             cnt += visited[x][i];
@@ -349,7 +347,9 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                             {
                                 e.printStackTrace();
                             }
-                            msocket.emit("playerwin",info);
+                            if(e==1) {
+                                msocket.emit("playerwin", info);
+                            }
                             mturn = false;
 
                             totallinescount = 0;
@@ -406,12 +406,11 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         finish();
         Intent i = new Intent(onlinegame.this,MainActivity.class);
         startActivity(i);
-
-
     }
 
     @Override
     public void onClick(View v) {
+        e=1;
         if (playerturn) {
             int x = 0, y = 0;
             String vtag = v.getTag().toString();
@@ -518,7 +517,9 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     {
                         e.printStackTrace();
                     }
-                    msocket.emit("playerwin",info);
+                    if(e==1) {
+                        msocket.emit("playerwin", info);
+                    }
                     mturn = false;
                     totallinescount = 0;
                     mturn = true;
@@ -577,7 +578,9 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     info.put("a53", visited[4][2]);
                     info.put("a54", visited[4][3]);
                     info.put("a55", visited[4][4]);
-                    msocket.emit("playermove", info);
+                    if(e==1) {
+                        msocket.emit("playermove", info);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
