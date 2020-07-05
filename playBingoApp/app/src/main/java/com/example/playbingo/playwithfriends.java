@@ -41,8 +41,8 @@ public class playwithfriends extends AppCompatActivity {
 
         Initializefields();
 
-        RatKiller app = (RatKiller)getApplication();
-        mSocket = app.getmSocket();
+
+        mSocket=SocketHandler.getSocket();
 
 
         mSocket.on("friendPairing",onfriendPairing);

@@ -65,8 +65,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
         intializedfields();
 
-        RatKiller app = (RatKiller)getApplication();
-        msocket = app.getmSocket();
+        msocket=SocketHandler.getSocket();
 
 
 
@@ -149,9 +148,9 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 public void run() {
                     Toast.makeText(onlinegame.this, "YOU LOSE", Toast.LENGTH_SHORT).show();
                     mturn = false;
-                    msocket.disconnect();
-                    finish();
+                    finishAndRemoveTask();
                 }
+
             });
         }
     };
@@ -164,8 +163,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 public void run() {
                     Toast.makeText(onlinegame.this, "YOU WIN", Toast.LENGTH_SHORT).show();
                     mturn = false;
-                    msocket.disconnect();
-                    finish();
+                    finishAndRemoveTask();
 
                 }
             });
@@ -405,7 +403,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     public void onBackPressed() {
 
         super.onBackPressed();
-        msocket.disconnect();
         finish();
         Intent i = new Intent(onlinegame.this,MainActivity.class);
         startActivity(i);
