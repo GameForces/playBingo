@@ -141,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"hii"+args[0].toString(),Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,onlinegame.class);
                     i.putExtra("turn",args[0].toString());
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
                 }
             });
