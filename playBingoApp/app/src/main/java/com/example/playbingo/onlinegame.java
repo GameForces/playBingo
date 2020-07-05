@@ -143,7 +143,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     Toast.makeText(onlinegame.this, "YOU LOSE", Toast.LENGTH_SHORT).show();
                     mturn = false;
                     e=0;
-                    finishAndRemoveTask();
                 }
 
             });
@@ -159,7 +158,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     Toast.makeText(onlinegame.this, "YOU WIN", Toast.LENGTH_SHORT).show();
                     mturn = false;
                     e=0;
-                    finishAndRemoveTask();
 
                 }
             });
@@ -343,6 +341,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 info.put("a53", visited[4][2]);
                                 info.put("a54", visited[4][3]);
                                 info.put("a55", visited[4][4]);
+                                info.put("e", e);
+
                             }catch (JSONException e)
                             {
                                 e.printStackTrace();
@@ -513,6 +513,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         info.put("a53", visited[4][2]);
                         info.put("a54", visited[4][3]);
                         info.put("a55", visited[4][4]);
+                        info.put("e", e);
                     }catch (JSONException e)
                     {
                         e.printStackTrace();
@@ -578,6 +579,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     info.put("a53", visited[4][2]);
                     info.put("a54", visited[4][3]);
                     info.put("a55", visited[4][4]);
+                    info.put("e", e);
                     if(e==1) {
                         msocket.emit("playermove", info);
                     }
