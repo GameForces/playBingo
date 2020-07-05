@@ -36,11 +36,7 @@ public class groupchat extends AppCompatActivity {
     private EditText typedmessage;
     private String message;
     private Socket mSocket;
-    {
-        try {
-            mSocket = IO.socket("https://obscure-reaches-99859.herokuapp.com/");
-        } catch (URISyntaxException e) {}
-    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +51,7 @@ public class groupchat extends AppCompatActivity {
 
 
 
+        mSocket=SocketHandler.getSocket();
         messageListView = findViewById(R.id.messageListView);
 
         List<MessageFormat> messageFormatList = new ArrayList<>();

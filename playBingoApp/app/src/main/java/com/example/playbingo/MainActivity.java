@@ -15,14 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.nkzawa.emitter.Emitter;
-import com.github.nkzawa.socketio.client.IO;
-import com.github.nkzawa.socketio.client.Socket;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.github.nkzawa.socketio.client.IO;
+import com.github.nkzawa.socketio.client.Socket;
+
 import java.net.URISyntaxException;
-import java.util.UUID;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -32,20 +32,22 @@ public class MainActivity extends AppCompatActivity {
     private TextView PlayWithFriends;
     private TextView ChatRoom;
     private Socket mSocket;
-
+    private int e=0;
+    {
+        try {
+            mSocket = IO.socket("https://obscure-reaches-99859.herokuapp.com/");
+        } catch (URISyntaxException e) {}
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Initializefields();
 
-        RatKiller app = (RatKiller)getApplication();
-        mSocket = app.getmSocket();
+        SocketHandler.setSocket(mSocket);
 
-        if (mSocket.connected()){
-            Toast.makeText(MainActivity.this, "Connected!!",Toast.LENGTH_SHORT).show();
-        }
 
+        mSocket.connect();
         UserDatabase db = new UserDatabase(MainActivity.this);
         username = db.getcurrentuser();
 
@@ -70,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
+                e=1;
                 JSONObject info = new JSONObject();
                 try {
                     info.put("username", username);
@@ -89,17 +91,18 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        progressBar.cancel();
-                        LayoutInflater inflater = getLayoutInflater();
-                        View layout = inflater.inflate(R.layout.custum_toast, null);
-                        TextView text = (TextView) layout.findViewById(R.id.meage);
+                        if(e==0) {
+                            progressBar.cancel();
+                            LayoutInflater inflater = getLayoutInflater();
+                            View layout = inflater.inflate(R.layout.custum_toast, null);
+                            TextView text = (TextView) layout.findViewById(R.id.meage);
 
-                        text.setText("No user found");
-                        Toast toast = new Toast(MainActivity.this);
-                        toast.setDuration(Toast.LENGTH_SHORT);
-                        toast.setView(layout);
-                        toast.show();
-
+                            text.setText("No user found");
+                            Toast toast = new Toast(MainActivity.this);
+                            toast.setDuration(Toast.LENGTH_SHORT);
+                            toast.setView(layout);
+                            toast.show();
+                        }
                     }
                 }, 20000);
 
@@ -139,6 +142,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
 
+                    e=1;
                     Toast.makeText(MainActivity.this,"hii"+args[0].toString(),Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,onlinegame.class);
                     i.putExtra("turn",args[0].toString());
@@ -146,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(i);
+                    finish();
                 }
             });
         }
