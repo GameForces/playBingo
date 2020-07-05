@@ -111,7 +111,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         sendmessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                msocket.connect();
                /* Toast.makeText(onlinegame.this, visited[0][0] + " " + visited[0][1] + " "
                                 + visited[0][2] + " " + visited[0][3] + " " + visited[0][4] + "\n" +
                                 visited[1][0] + " " + visited[1][1] + " "
