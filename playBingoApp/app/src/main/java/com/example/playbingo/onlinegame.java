@@ -39,13 +39,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     private boolean mturn = true;
     private int e=0;
 
-    {
-        try {
-            msocket = IO.socket("https://obscure-reaches-99859.herokuapp.com/");
-        } catch (URISyntaxException e) {
-        }
-    }
-
     private static int getNum(ArrayList<Integer> v) {
         int n = v.size();
         int index = (int) (Math.random() * n);
@@ -71,6 +64,11 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         e+=1;
 
         intializedfields();
+
+        RatKiller app = (RatKiller)getApplication();
+        msocket = app.getmSocket();
+
+
 
         totallinescount = 0;
         playerturn = false;

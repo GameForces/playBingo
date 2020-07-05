@@ -30,12 +30,6 @@ public class playwithfriends extends AppCompatActivity {
     private String fusername;
     private String username;
     private Socket mSocket;
-    {
-        try {
-            mSocket = IO.socket("https://obscure-reaches-99859.herokuapp.com/");
-        } catch (URISyntaxException e) {}
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +41,8 @@ public class playwithfriends extends AppCompatActivity {
 
         Initializefields();
 
+        RatKiller app = (RatKiller)getApplication();
+        mSocket = app.getmSocket();
 
 
         mSocket.on("friendPairing",onfriendPairing);
@@ -71,7 +67,6 @@ public class playwithfriends extends AppCompatActivity {
                 }
                 else
                 {
-                    mSocket.connect();
                     JSONObject info = new JSONObject();
                     try{
                         info.put("username",username);

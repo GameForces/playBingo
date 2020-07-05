@@ -75,7 +75,6 @@ public class groupchat extends AppCompatActivity {
                     info.put("id",uniqueId);
                     info.put("username",username);
                     info.put("message",message);
-                    mSocket.connect();
                     mSocket.emit("grpMsg",info);
                     MessageFormat format = new MessageFormat(uniqueId, username, message);
                     messageAdapter.add(format);
