@@ -85,18 +85,7 @@ public class playwithfriends extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-
                             progressBar.cancel();
-                            LayoutInflater inflater = getLayoutInflater();
-                            View layout = inflater.inflate(R.layout.custum_toast, null);
-                            TextView text = (TextView) layout.findViewById(R.id.meage);
-
-                            text.setText("friend Cannot connect");
-                            Toast toast = new Toast(playwithfriends.this);
-                            toast.setDuration(Toast.LENGTH_SHORT);
-                            toast.setView(layout);
-                            toast.show();
-
                         }
                     }, 20000);
                 }

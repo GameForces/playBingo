@@ -3,8 +3,10 @@ package com.example.playbingo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +40,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     private Socket msocket;
     private boolean mturn = true;
     private int e=0;
+    private TextView YourTurn;
 
     private static int getNum(ArrayList<Integer> v) {
         int n = v.size();
@@ -68,6 +71,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         msocket=SocketHandler.getSocket();
 
 
+        turnfluc();
 
         totallinescount = 0;
         playerturn = false;
@@ -80,6 +84,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
         if (turn.equals("true")) {
             playerturn = true;
+            YourTurn.setText("Your Turn");
         }
 
         int k = 0;
@@ -169,6 +174,27 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         });
     }
 
+    private void turnfluc()
+    {
+        int color = YourTurn.getCurrentTextColor();
+        if(color ==Color.parseColor("#94ff87"))
+        {
+            YourTurn.setTextColor(Color.parseColor("#860000"));
+        }
+        if(color == Color.parseColor("#860000"))
+        {
+            Toast.makeText(onlinegame.this,"hii",Toast.LENGTH_LONG).show();
+            YourTurn.setTextColor(Color.parseColor("#94ff87"));
+        }
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                turnfluc();
+            }
+        }, 200);
+    }
 
 
     private Emitter.Listener onlose = new Emitter.Listener() {
@@ -228,9 +254,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void run() {
 
-                    if (mturn) {
-                        playerturn = true;
-                    }
                     int x = 0, y = 0;
 
                     String m = "a";
@@ -265,7 +288,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         if (cnt == 5) {
                             totallinescount += 1;
                             for (int i = 0; i < 5; i++) {
-                                a[x][i].setBackgroundColor(Color.parseColor("#000000"));
+                                a[x][i].setBackgroundColor(Color.parseColor("#4a235a"));
                             }
                         }
 
@@ -276,7 +299,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         if (cnt == 5) {
                             totallinescount += 1;
                             for (int i = 0; i < 5; i++) {
-                                a[i][y].setBackgroundColor(Color.parseColor("#000000"));
+                                a[i][y].setBackgroundColor(Color.parseColor("#4a235a"));
                             }
                         }
                         if (x + y == 4) {
@@ -287,7 +310,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                             if (cnt == 5) {
                                 totallinescount += 1;
                                 for (int i = 0; i < 5; i++) {
-                                    a[4 - i][i].setBackgroundColor(Color.parseColor("#000000"));
+                                    a[4 - i][i].setBackgroundColor(Color.parseColor("#4a235a"));
                                 }
                             }
                         }
@@ -299,10 +322,17 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                             if (cnt == 5) {
                                 totallinescount ++;
                                 for (int i = 0; i < 5; i++) {
-                                    a[i][i].setBackgroundColor(Color.parseColor("#000000"));
+                                    a[i][i].setBackgroundColor(Color.parseColor("#4a235a"));
                                 }
                             }
                         }
+                    }
+
+
+                    if (mturn) {
+                        playerturn = true;
+
+                        YourTurn.setText("Your Turn");
                     }
 
                 }
@@ -319,6 +349,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 a[i - 1][j - 1].setOnClickListener(this);
             }
         }
+        YourTurn = (TextView) findViewById(R.id.your_turn);
         typedmessage = (EditText) findViewById(R.id.send_message_in_game);
         sendmessage = (ImageButton) findViewById(R.id.send_message_game);
     }
@@ -337,6 +368,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         e=1;
         if (playerturn) {
+            YourTurn.setText("");
             int x = 0, y = 0;
             String vtag = v.getTag().toString();
             for (int i = 0; i < 5; i++) {
@@ -359,7 +391,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 if (cnt == 5) {
                     totallinescount += 1;
                     for (int i = 0; i < 5; i++) {
-                        a[x][i].setBackgroundColor(Color.parseColor("#000000"));
+                        a[x][i].setBackgroundColor(Color.parseColor("#4a235a"));
                     }
                 }
 
@@ -370,7 +402,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 if (cnt == 5) {
                     totallinescount += 1;
                     for (int i = 0; i < 5; i++) {
-                        a[i][y].setBackgroundColor(Color.parseColor("#000000"));
+                        a[i][y].setBackgroundColor(Color.parseColor("#4a235a"));
                     }
                 }
                 if (x + y == 4) {
@@ -381,7 +413,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     if (cnt == 5) {
                         totallinescount += 1;
                         for (int i = 0; i < 5; i++) {
-                            a[4 - i][i].setBackgroundColor(Color.parseColor("#000000"));
+                            a[4 - i][i].setBackgroundColor(Color.parseColor("#4a235a"));
                         }
                     }
                 }

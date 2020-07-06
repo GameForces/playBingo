@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/groupchatbot"
         />
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/groupchatbot"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
@@ -51,20 +51,24 @@
         <EditText
             android:id="@+id/groupMessage"
             android:background="@drawable/border"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
             android:scrollbarSize="5dp"
             android:textColor="#ffffff"
             android:screenReaderFocusable="true"
             android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:paddingLeft="10dp"
+            android:layout_toLeftOf="@+id/sendgrpmessage"
             />
         <ImageButton
             android:id="@+id/sendgrpmessage"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/sendmessage"
+            android:layout_marginRight="1dp"
+            android:layout_alignParentRight="true"
             />
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>
