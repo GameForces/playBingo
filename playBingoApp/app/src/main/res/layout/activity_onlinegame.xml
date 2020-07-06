@@ -14,17 +14,12 @@
         android:orientation="horizontal"
         android:background="#575677"
         >
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:layout_width="165dp"
-            android:layout_height="match_parent"
-            android:src="@drawable/face1"
-            >
-
-        </de.hdodenhof.circleimageview.CircleImageView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@android:color/holo_blue_light"
+            >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -37,71 +32,75 @@
 
             </TextView>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:text="Player 1"
+                android:textSize="30dp"
+
+                >
+
+            </TextView>
+
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
         android:background="#ffffff"
-        >
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_width="315dp"
+            android:layout_height="350dp"
+            android:layout_marginLeft="20dp"
             android:layout_marginTop="50dp"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="50dp"
-            >
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/a11"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/gamecircle"
-                    android:text="1"
                     android:layout_marginLeft="2dp"
-                    android:tag="p11"></Button>
+                    android:background="@drawable/gamecircle"
+                    android:tag="p11"
+                    android:text="1"></Button>
 
                 <Button
                     android:id="@+id/a12"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p12"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
 
                 <Button
                     android:id="@+id/a13"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p13"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
+
                 <Button
                     android:id="@+id/a14"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p14"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
 
                 <Button
                     android:id="@+id/a15"
@@ -115,188 +114,164 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="2dp"
-                >
+                android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/a21"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p21"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
 
                 <Button
                     android:id="@+id/a22"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p22"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
 
                 <Button
                     android:id="@+id/a23"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p23"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
+
                 <Button
                     android:id="@+id/a24"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p24"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
 
                 <Button
                     android:id="@+id/a25"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p25"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="2dp"
-                >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/a31"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p31"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    />
+                    android:text="1" />
 
                 <Button
                     android:id="@+id/a32"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p32"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    />
+                    android:text="1" />
 
                 <Button
                     android:id="@+id/a33"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p33"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    />
+                    android:text="1" />
 
                 <Button
                     android:id="@+id/a34"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p34"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
+
                 <Button
                     android:id="@+id/a35"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p35"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    />
+                    android:text="1" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="2dp"
-                >
+                android:orientation="horizontal">
+
                 <Button
                     android:id="@+id/a41"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/gamecircle"
                     android:tag="p41"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
 
                 <Button
                     android:id="@+id/a42"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p42"
-                    android:text="1"
-                    android:layout_marginLeft="2dp"
-                    >
-                </Button>
+                    android:text="1"></Button>
 
                 <Button
                     android:id="@+id/a43"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p43"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
+
                 <Button
                     android:id="@+id/a44"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p44"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
 
                 <Button
                     android:id="@+id/a45"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p45"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:orientation="horizontal"
                 android:layout_marginTop="2dp"
-                >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/a51"
@@ -310,42 +285,38 @@
                     android:id="@+id/a52"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p52"
-                    android:text="1"
-                    android:layout_marginLeft="2dp"
-                    >
-                </Button>
+                    android:text="1"></Button>
 
                 <Button
                     android:id="@+id/a53"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p53"
-                    android:layout_marginLeft="2dp"
-                    android:text="1"
-                    >
-                </Button>
+                    android:text="1"></Button>
+
                 <Button
                     android:id="@+id/a54"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
                     android:tag="p54"
-                    android:layout_marginLeft="2dp"
 
-                    android:text="1">
-                </Button>
+                    android:text="1"></Button>
 
                 <Button
-                    android:text="1"
                     android:id="@+id/a55"
-                    android:layout_marginLeft="2dp"
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
                     android:background="@drawable/gamecircle"
-                    android:tag="p55"></Button>
+                    android:tag="p55"
+                    android:text="1"></Button>
 
             </LinearLayout>
 
@@ -363,19 +334,21 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_orange_dark"
             android:orientation="vertical">
 
             <EditText
-                android:layout_marginTop="30dp"
                 android:id="@+id/send_message_in_game"
-                android:layout_width="wrap_content"
+                android:layout_width="331dp"
                 android:layout_height="wrap_content"
-                android:hint="send message"
-                >
-            </EditText>
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:hint="send message"></EditText>
+
             <ImageButton
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="0dp"
                 android:layout_toRightOf="@+id/send_message_in_game"
                 android:id="@+id/send_message_game"
                 android:layout_width="wrap_content"
