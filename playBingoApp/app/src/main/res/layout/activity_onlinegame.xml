@@ -6,26 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".onlinegame"
     android:orientation="vertical"
+    android:background="@drawable/game_wallpaper"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:orientation="horizontal"
-        android:background="#575677"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@android:color/holo_blue_light"
+            android:orientation="horizontal"
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Player 1"
+                android:layout_marginTop="15dp"
+                android:text="You"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:layout_weight="1"
                 android:textSize="30dp"
 
                 >
@@ -35,8 +37,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:text="Player 1"
+                android:textColor="#FFFFFF"
                 android:textSize="30dp"
 
                 >
@@ -49,7 +54,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="500dp"
-        android:background="#ffffff"
         android:orientation="vertical">
 
         <LinearLayout
@@ -329,22 +333,21 @@
         android:layout_width="match_parent"
         android:layout_height="165dp"
         android:orientation="horizontal"
-        android:background="#575677"
         >
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/holo_orange_dark"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/send_message_in_game"
-                android:layout_width="331dp"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginStart="41dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:hint="send message"></EditText>
 
             <ImageButton
