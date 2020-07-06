@@ -67,6 +67,7 @@ public class groupchat extends AppCompatActivity {
             public void onClick(View v) {
                 message = typedmessage.getText().toString();
 
+                typedmessage.setText("");
                 JSONObject info = new JSONObject();
                 try {
                     info.put("id",uniqueId);

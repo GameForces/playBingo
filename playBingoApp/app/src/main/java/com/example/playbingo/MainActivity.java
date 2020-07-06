@@ -92,23 +92,12 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
 
-                        if(e==0) {
-                            progressBar.cancel();
-                            LayoutInflater inflater = getLayoutInflater();
-                            View layout = inflater.inflate(R.layout.custum_toast, null);
-                            TextView text = (TextView) layout.findViewById(R.id.meage);
-
-                            text.setText("No user found");
-                            Toast toast = new Toast(MainActivity.this);
-                            toast.setDuration(Toast.LENGTH_SHORT);
-                            toast.setView(layout);
-                            toast.show();
-                        }
                     }
                 }, 20000);
 
             }
         });
+
 
 
         PlayWithFriends.setOnClickListener(new View.OnClickListener() {
