@@ -7,7 +7,7 @@
     tools:context=".onlinegame"
     android:orientation="vertical"
     android:background="@drawable/game_wallpaper"
-    android:alpha="0.6"
+
     >
 
     <LinearLayout
@@ -55,7 +55,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="400dp"
         android:orientation="vertical"
         >
 
@@ -65,7 +65,6 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="50dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -334,7 +333,22 @@
 
     </LinearLayout>
 
+
+    <TextView
+        android:layout_above="@+id/bott"
+        android:id="@+id/your_turn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:text=""
+        android:layout_marginBottom="40dp"
+        android:textColor="#F0FF00"
+        android:textSize="30dp"
+        >
+
+    </TextView>
     <LinearLayout
+        android:id="@+id/bott"
         android:layout_width="match_parent"
         android:layout_height="165dp"
         android:orientation="horizontal"
@@ -362,21 +376,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/sendmessage"
+                android:background="@android:color/holo_red_dark"
                 >
             </ImageButton>
-            <TextView
-                android:id="@+id/your_turn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/send_message_game"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="60dp"
-                android:text=""
-                android:textColor="#860000"
-                android:textSize="30dp"
-                >
-
-            </TextView>
 
         </RelativeLayout>
     </LinearLayout>
