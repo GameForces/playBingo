@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Initializefields();
+        mSocket.connect();
 
         SocketHandler.setSocket(mSocket);
 
