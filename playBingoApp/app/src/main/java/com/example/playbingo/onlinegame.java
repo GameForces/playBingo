@@ -62,6 +62,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onlinegame);
 
+        e=0;
         intializedfields();
 
         msocket=SocketHandler.getSocket();
@@ -89,6 +90,41 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             }
         }
 
+        JSONObject info1 = new JSONObject();
+        try {
+            info1.put("a11", a[0][0].getText().toString());
+            info1.put("a12", a[0][1].getText().toString());
+            info1.put("a13", a[0][2].getText().toString());
+            info1.put("a14", a[0][3].getText().toString());
+            info1.put("a15", a[0][4].getText().toString());
+            info1.put("a21", a[1][0].getText().toString());
+            info1.put("a22", a[1][1].getText().toString());
+            info1.put("a23", a[1][2].getText().toString());
+            info1.put("a24", a[1][3].getText().toString());
+            info1.put("a25", a[1][4].getText().toString());
+            info1.put("a31", a[2][0].getText().toString());
+            info1.put("a32", a[2][1].getText().toString());
+            info1.put("a33", a[2][2].getText().toString());
+            info1.put("a34", a[2][3].getText().toString());
+            info1.put("a35", a[2][4].getText().toString());
+            info1.put("a41", a[3][0].getText().toString());
+            info1.put("a42", a[3][1].getText().toString());
+            info1.put("a43", a[3][2].getText().toString());
+            info1.put("a44", a[3][3].getText().toString());
+            info1.put("a45", a[3][4].getText().toString());
+            info1.put("a51", a[4][0].getText().toString());
+            info1.put("a52", a[4][1].getText().toString());
+            info1.put("a53", a[4][2].getText().toString());
+            info1.put("a54", a[4][3].getText().toString());
+            info1.put("a55", a[4][4].getText().toString());
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+        msocket.emit("yourmat", info1);
+
+
+
         for (int i = 1; i <= 5; i++) {
             for (int j = 1; j <= 5; j++) {
                 visited[i - 1][j - 1] = 0;
@@ -99,11 +135,12 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         if (mturn) {
 
         }
-        msocket.on("getmove", onmove);
         msocket.on("gamemessage", onmss);
-        msocket.on("youlose", onlose);
-        msocket.on("youwin", onwin);
-
+        msocket.on("onmove", onmove);
+        if(mturn) {
+            msocket.on("youlose", onlose);
+            msocket.on("youwin", onwin);
+        }
         sendmessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,42 +257,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     if (visited[x][y] == 0) {
                         a[x][y].setBackgroundColor(Color.parseColor("#ff0000"));
                         visited[x][y] = 1;
-                        JSONObject info1 = new JSONObject();
-                        try {
-                            info1.put("cnt",totallinescount);
-                            info1.put("a11", visited[0][0]);
-                            info1.put("a12", visited[0][1]);
-                            info1.put("a13", visited[0][2]);
-                            info1.put("a14", visited[0][3]);
-                            info1.put("a15", visited[0][4]);
-                            info1.put("a21", visited[1][0]);
-                            info1.put("a22", visited[1][1]);
-                            info1.put("a23", visited[1][2]);
-                            info1.put("a24", visited[1][3]);
-                            info1.put("a25", visited[1][4]);
-                            info1.put("a31", visited[2][0]);
-                            info1.put("a32", visited[2][1]);
-                            info1.put("a33", visited[2][2]);
-                            info1.put("a34", visited[2][3]);
-                            info1.put("a35", visited[2][4]);
-                            info1.put("a41", visited[3][0]);
-                            info1.put("a42", visited[3][1]);
-                            info1.put("a43", visited[3][2]);
-                            info1.put("a44", visited[3][3]);
-                            info1.put("a45", visited[3][4]);
-                            info1.put("a51", visited[4][0]);
-                            info1.put("a52", visited[4][1]);
-                            info1.put("a53", visited[4][2]);
-                            info1.put("a54", visited[4][3]);
-                            info1.put("a55", visited[4][4]);
-                            info1.put("val", e);
-                        }catch (JSONException e)
-                        {
-                            e.printStackTrace();
-                        }
-                        if(e==1) {
-                            msocket.emit("playerw", info1);
-                        }
+
                         int cnt = 0;
                         for (int i = 0; i < 5; i++) {
                             cnt += visited[x][i];
@@ -298,83 +300,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 totallinescount ++;
                                 for (int i = 0; i < 5; i++) {
                                     a[i][i].setBackgroundColor(Color.parseColor("#000000"));
-                                }
-                            }
-                        }
-
-                        if (totallinescount > 4) {
-
-                            playerturn = false;
-
-                            for (int i = 1; i <= 5; i++) {
-                                for (int j = 1; j <= 5; j++) {
-                                    visited[i - 1][j - 1] = 0;
-                                }
-                            }
-
-                            JSONObject info = new JSONObject();
-                            try {
-                                info.put("cnt",totallinescount);
-
-                                info.put("a11", visited[0][0]);
-                                info.put("a12", visited[0][1]);
-                                info.put("a13", visited[0][2]);
-                                info.put("a14", visited[0][3]);
-                                info.put("a15", visited[0][4]);
-                                info.put("a21", visited[1][0]);
-                                info.put("a22", visited[1][1]);
-                                info.put("a23", visited[1][2]);
-                                info.put("a24", visited[1][3]);
-                                info.put("a25", visited[1][4]);
-                                info.put("a31", visited[2][0]);
-                                info.put("a32", visited[2][1]);
-                                info.put("a33", visited[2][2]);
-                                info.put("a34", visited[2][3]);
-                                info.put("a35", visited[2][4]);
-                                info.put("a41", visited[3][0]);
-                                info.put("a42", visited[3][1]);
-                                info.put("a43", visited[3][2]);
-                                info.put("a44", visited[3][3]);
-                                info.put("a45", visited[3][4]);
-                                info.put("a51", visited[4][0]);
-                                info.put("a52", visited[4][1]);
-                                info.put("a53", visited[4][2]);
-                                info.put("a54", visited[4][3]);
-                                info.put("a55", visited[4][4]);
-                                info.put("e", e);
-
-                            }catch (JSONException e)
-                            {
-                                e.printStackTrace();
-                            }
-                            if(e==1) {
-                                msocket.emit("playerwin", info);
-                            }
-                            mturn = false;
-
-                            totallinescount = 0;
-                            mturn = true;
-                            int n = 25;
-                            ArrayList<Integer> vv = new ArrayList<>(n);
-                            generateRandom(25, vv);
-
-                            String turn1 = getIntent().getStringExtra("turn");
-
-                            if (turn1.equals("true")) {
-                                playerturn = true;
-                            }
-
-                            int k = 0;
-                            for (int i = 0; i < 5; i++) {
-                                for (int j = 0; j < 5; j++) {
-                                    a[i][j].setText(vv.get(k).toString());
-                                    k++;
-                                }
-                            }
-
-                            for (int i = 1; i <= 5; i++) {
-                                for (int j = 1; j <= 5; j++) {
-                                    visited[i - 1][j - 1] = 0;
                                 }
                             }
                         }
@@ -553,33 +478,9 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 JSONObject info = new JSONObject();
                 try {
                     info.put("number", a[x][y].getText().toString());
-                    info.put("cnt", totallinescount);
-                    info.put("a11", visited[0][0]);
-                    info.put("a12", visited[0][1]);
-                    info.put("a13", visited[0][2]);
-                    info.put("a14", visited[0][3]);
-                    info.put("a15", visited[0][4]);
-                    info.put("a21", visited[1][0]);
-                    info.put("a22", visited[1][1]);
-                    info.put("a23", visited[1][2]);
-                    info.put("a24", visited[1][3]);
-                    info.put("a25", visited[1][4]);
-                    info.put("a31", visited[2][0]);
-                    info.put("a32", visited[2][1]);
-                    info.put("a33", visited[2][2]);
-                    info.put("a34", visited[2][3]);
-                    info.put("a35", visited[2][4]);
-                    info.put("a41", visited[3][0]);
-                    info.put("a42", visited[3][1]);
-                    info.put("a43", visited[3][2]);
-                    info.put("a44", visited[3][3]);
-                    info.put("a45", visited[3][4]);
-                    info.put("a51", visited[4][0]);
-                    info.put("a52", visited[4][1]);
-                    info.put("a53", visited[4][2]);
-                    info.put("a54", visited[4][3]);
-                    info.put("a55", visited[4][4]);
-                    info.put("e", e);
+                    info.put("x", x);
+                    info.put("y", y);
+
                     if(e==1) {
                         msocket.emit("playermove", info);
                     }
@@ -591,7 +492,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         else {
             if (mturn) {
                 Toast.makeText(onlinegame.this, "Opponents turn", Toast.LENGTH_SHORT).show();
-            } else {
+            }
+            else {
                 Toast.makeText(onlinegame.this, "Game Over", Toast.LENGTH_SHORT).show();
             }
         }
