@@ -101,10 +101,22 @@ public class playwithfriends extends AppCompatActivity {
                 @Override
                 public void run() {
 
-                    Toast.makeText(playwithfriends.this,"hii"+args[0].toString(),Toast.LENGTH_SHORT).show();
-                     Intent i = new Intent(playwithfriends.this,onlinegame.class);
-                    i.putExtra("turn",args[0].toString());
-                    startActivity(i);
+                    String data = args[0].toString();
+                    try {
+                        JSONObject info = new JSONObject(data);
+
+                        Intent i = new Intent(playwithfriends.this,onlinegame.class);
+                        i.putExtra("turn",info.getString("bool"));
+                        i.putExtra("fuser",info.getString("fuser"));
+                        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                        finish();
+                    }catch (JSONException er)
+                    {
+                        er.printStackTrace();
+                    }
                 }
             });
         }

@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Initializefields();
+        mSocket.connect();
 
         SocketHandler.setSocket(mSocket);
 
@@ -136,10 +137,9 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject info = new JSONObject(data);
 
                         e=1;
-                        Toast.makeText(MainActivity.this,"",Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(MainActivity.this,onlinegame.class);
                         i.putExtra("turn",info.getString("bool"));
-                        i.putExtra("fname",info.getString("fuser"));
+                        i.putExtra("fuser",info.getString("fuser"));
                         i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -147,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
                         finish();
                     }catch (JSONException er)
                     {
+                        Toast.makeText(MainActivity.this,er.toString(),Toast.LENGTH_SHORT).show();
                         er.printStackTrace();
                     }
 

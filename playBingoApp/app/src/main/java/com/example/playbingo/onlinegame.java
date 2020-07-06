@@ -41,6 +41,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     private boolean mturn = true;
     private int e=0;
     private TextView YourTurn;
+    private TextView Fuser;
 
     private static int getNum(ArrayList<Integer> v) {
         int n = v.size();
@@ -81,6 +82,9 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         generateRandom(25, v);
 
         String turn = getIntent().getStringExtra("turn");
+        String fuser  = getIntent().getStringExtra("fuser");
+
+        Fuser.setText(fuser);
 
         if (turn.equals("true")) {
             playerturn = true;
@@ -183,7 +187,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         }
         if(color == Color.parseColor("#860000"))
         {
-            Toast.makeText(onlinegame.this,"hii",Toast.LENGTH_LONG).show();
             YourTurn.setTextColor(Color.parseColor("#94ff87"));
         }
         final Handler handler = new Handler();
@@ -352,6 +355,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         YourTurn = (TextView) findViewById(R.id.your_turn);
         typedmessage = (EditText) findViewById(R.id.send_message_in_game);
         sendmessage = (ImageButton) findViewById(R.id.send_message_game);
+        Fuser = (TextView)findViewById(R.id.fusername);
+
     }
 
 
