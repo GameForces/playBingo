@@ -61,15 +61,11 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/l2"
-        android:layout_below="@+id/l1"
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical"
-        >
-
         <LinearLayout
+
+            android:layout_centerInParent="true"
+            android:id="@+id/l2"
+            android:layout_below="@+id/l1"
             android:layout_width="315dp"
             android:layout_height="350dp"
             android:layout_marginLeft="20dp"
@@ -341,7 +337,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
 
 
     <TextView
@@ -375,6 +370,8 @@
                 android:layout_marginStart="41dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:textColorHint="#ffffff"
+                android:textColor="#ffffff"
                 android:hint="send message"></EditText>
 
             <ImageButton
@@ -398,10 +395,12 @@
         >
         <ImageButton
             android:id="@+id/mode1"
+            android:background="@drawable/game_wallpaper"
             android:layout_marginLeft="130dp"
             android:layout_width="40dp"
             android:layout_height="40dp"/>
         <ImageButton
+            android:background="@drawable/gameback"
             android:id="@+id/mode2"
             android:layout_marginLeft="30dp"
             android:layout_width="40dp"

@@ -141,19 +141,11 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
 
         resources = R.drawable.gmecir;
+        sendmessage.setBackgroundColor(Color.parseColor("#3498db"));
         Mode1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-/*
-                    animFade.setAnimationListener(new Animation.AnimationListener() {
-                    public void onAnimationStart(Animation animation) {}
-                    public void onAnimationRepeat(Animation animation) {}
-                    public void onAnimationEnd(Animation animation) {
-                        // when fadeout animation ends, fade in your second image
-                    }
-                });
-                maing.startAnimation(animFade);
-*/
+
                 Animation fadeIn = new AlphaAnimation(0, 1);
                 fadeIn.setInterpolator(new DecelerateInterpolator());
                 fadeIn.setDuration(1000);
@@ -169,6 +161,10 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         {
                             a[i][j].setBackgroundResource(R.drawable.gamecircledaymode);
                         }
+                        else if(visited[i][j]==2)
+                        {
+                            a[i][j].setBackgroundResource(R.drawable.gamecircle2);
+                        }
                         else
                         {
                             a[i][j].setBackgroundResource(R.drawable.gamedaymode1);
@@ -176,6 +172,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     }
                 }
                 resources = R.drawable.gamecircledaymode;
+                sendmessage.setBackgroundColor(Color.parseColor("#ff0000"));
             }
         });
         Mode2.setOnClickListener(new View.OnClickListener() {
@@ -196,6 +193,10 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         {
                             a[i][j].setBackgroundResource(R.drawable.gmecir);
                         }
+                        else if(visited[i][j]==2)
+                        {
+                            a[i][j].setBackgroundResource(R.drawable.gamecirclelast);
+                        }
                         else
                         {
                             a[i][j].setBackgroundResource(R.drawable.gamecircle);
@@ -203,6 +204,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     }
                 }
                 resources = R.drawable.gmecir;
+                sendmessage.setBackgroundColor(Color.parseColor("#3498db"));
             }
         });
 
@@ -319,7 +321,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(onlinegame.this, "YOU LOSE", Toast.LENGTH_SHORT).show();
                     YourTurn.setText("YOU LOSE");
                     msocket.emit("over");
                     mturn = false;
@@ -332,8 +333,10 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                             final Dialog dialog = new Dialog(onlinegame.this);
                             dialog.setContentView(R.layout.endgamedailog);
                             dialog.setCanceledOnTouchOutside(false);
-                            dialog.show();
 
+                            if(!((Activity) onlinegame.this).isFinishing()) {
+                                dialog.show();
+                            }
                             replay = (TextView)dialog.findViewById(R.id.game_replay);
                             playonline = (TextView)dialog.findViewById(R.id.game_play_online);
                             home = (TextView)dialog.findViewById(R.id.game_go_home);
@@ -375,6 +378,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
                         }
                     }, 5000);
+
                 }
 
             });
@@ -387,7 +391,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(onlinegame.this, "YOU WIN", Toast.LENGTH_SHORT).show();
                     YourTurn.setText("YOU WIN");
                     msocket.emit("over");
                     mturn = false;
@@ -399,7 +402,10 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                             final Dialog dialog = new Dialog(onlinegame.this);
                             dialog.setContentView(R.layout.endgamedailog);
                             dialog.setCanceledOnTouchOutside(false);
-                            dialog.show();
+
+                            if(!((Activity) onlinegame.this).isFinishing()) {
+                                dialog.show();
+                            }
 
                             replay = (TextView)dialog.findViewById(R.id.game_replay);
                             playonline = (TextView)dialog.findViewById(R.id.game_play_online);
@@ -539,54 +545,72 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         visited[x][y] = 1;
 
                         int cnt = 0;
-                        for (int i = 0; i < 5; i++) {
-                            cnt += visited[x][i];
+                        for (int i = 0; i < 5; i++)
+                        {
+                            if(visited[x][i]>0)
+                            {
+                                cnt += 1;
+                            }
                         }
                         if (cnt == 5) {
                             totallinescount += 1;
                             for (int i = 0; i < 5; i++) {
                                 a[x][i].setBackgroundResource(R.drawable.gamecirclelast);
+                                visited[x][i]=2;
                             }
                         }
 
                         cnt = 0;
                         for (int i = 0; i < 5; i++) {
-                            cnt += visited[i][y];
+                            if(visited[i][y]>0)
+                            {
+                                cnt += 1;
+                            }
                         }
                         if (cnt == 5) {
                             totallinescount += 1;
                             for (int i = 0; i < 5; i++) {
                                 a[i][y].setBackgroundResource(R.drawable.gamecirclelast);
+                                visited[i][y]=2;
                             }
                         }
                         if (x + y == 4) {
                             cnt = 0;
                             for (int i = 0; i < 5; i++) {
-                                cnt += visited[4 - i][i];
+                                if(visited[4 - i][i]>0)
+                                {
+                                    cnt += 1;
+                                }
                             }
                             if (cnt == 5) {
                                 totallinescount += 1;
                                 for (int i = 0; i < 5; i++) {
                                     a[4-i][i].setBackgroundResource(R.drawable.gamecirclelast);
+                                    visited[4-i][i]=2;
                                 }
                             }
                         }
                         if (x == y) {
                             cnt = 0;
                             for (int i = 0; i < 5; i++) {
-                                cnt += visited[i][i];
+                                if(visited[i][i]>0)
+                                {
+                                    cnt += 1;
+                                }
                             }
                             if (cnt == 5) {
                                 totallinescount ++;
                                 for (int i = 0; i < 5; i++) {
                                     a[i][i].setBackgroundResource(R.drawable.gamecirclelast);
+                                    visited[i][i]=2;
                                 }
                             }
                         }
                     }
 
 
-                    if (mturn) {
+                    if (mturn)
+                    {
                         playerturn = true;
 
                         YourTurn.setText("Your Turn");
@@ -634,7 +658,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         e=1;
         if (playerturn) {
-            YourTurn.setText("");
             int x = 0, y = 0;
             String vtag = v.getTag().toString();
             for (int i = 0; i < 5; i++) {
@@ -650,52 +673,73 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             if (visited[x][y] == 0) {
                 a[x][y].setBackgroundResource(resources);
                 visited[x][y] = 1;
+
                 int cnt = 0;
-                for (int i = 0; i < 5; i++) {
-                    cnt += visited[x][i];
+                for (int i = 0; i < 5; i++)
+                {
+                    if(visited[x][i]>0)
+                    {
+                        cnt += 1;
+                    }
                 }
                 if (cnt == 5) {
                     totallinescount += 1;
                     for (int i = 0; i < 5; i++) {
                         a[x][i].setBackgroundResource(R.drawable.gamecirclelast);
+                        visited[x][i]=2;
                     }
                 }
 
                 cnt = 0;
                 for (int i = 0; i < 5; i++) {
-                    cnt += visited[i][y];
+                    if(visited[i][y]>0)
+                    {
+                        cnt += 1;
+                    }
                 }
                 if (cnt == 5) {
                     totallinescount += 1;
                     for (int i = 0; i < 5; i++) {
                         a[i][y].setBackgroundResource(R.drawable.gamecirclelast);
+                        visited[i][y]=2;
+
                     }
                 }
                 if (x + y == 4) {
                     cnt = 0;
                     for (int i = 0; i < 5; i++) {
-                        cnt += visited[4 - i][i];
+                        if(visited[4 - i][i]>0)
+                        {
+                            cnt += 1;
+                        }
                     }
                     if (cnt == 5) {
                         totallinescount += 1;
                         for (int i = 0; i < 5; i++) {
                             a[4-i][i].setBackgroundResource(R.drawable.gamecirclelast);
+                            visited[4-i][i]=2;
                         }
                     }
                 }
                 if (x == y) {
                     cnt = 0;
                     for (int i = 0; i < 5; i++) {
-                        cnt += visited[i][i];
+                        if(visited[i][i]>0)
+                        {
+                            cnt += 1;
+                        }
                     }
                     if (cnt == 5) {
-                        totallinescount += 1;
+                        totallinescount ++;
                         for (int i = 0; i < 5; i++) {
                             a[i][i].setBackgroundResource(R.drawable.gamecirclelast);
-                            //a[i][i].setTextColor(Color.parseColor("#ffffff"));
+                            visited[i][i]=2;
                         }
                     }
                 }
+
+                YourTurn.setText("");
+
 
                 if (totallinescount > 4) {
                     playerturn = false;
@@ -745,9 +789,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     mturn = false;
                     totallinescount = 0;
                     mturn = true;
-                    int n = 25;
-                    ArrayList<Integer> vv = new ArrayList<>(n);
-                    generateRandom(25, vv);
 
                     String turn = getIntent().getStringExtra("turn");
 
@@ -755,19 +796,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         playerturn = true;
                     }
 
-                    int k = 0;
-                    for (int i = 0; i < 5; i++) {
-                        for (int j = 0; j < 5; j++) {
-                            a[i][j].setText(vv.get(k).toString());
-                            k++;
-                        }
-                    }
-
-                    for (int i = 1; i <= 5; i++) {
-                        for (int j = 1; j <= 5; j++) {
-                            visited[i - 1][j - 1] = 0;
-                        }
-                    }
 
                 }
                 playerturn = false;
