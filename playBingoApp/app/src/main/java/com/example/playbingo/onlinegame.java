@@ -864,6 +864,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     info.put("number", a[x][y].getText().toString());
                     info.put("x", x);
                     info.put("y", y);
+                    info.put("cnt",totallinescount);
 
                     if(e==1) {
                         msocket.emit("playermove", info);
