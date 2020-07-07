@@ -2,8 +2,11 @@ package com.example.playbingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -42,6 +45,7 @@ public class groupchat extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groupchat);
 
+        final Vibrator vibe = (Vibrator) groupchat.this.getSystemService(Context.VIBRATOR_SERVICE);
 
         uniqueId = UUID.randomUUID().toString();
         username= getIntent().getStringExtra("username");
@@ -67,16 +71,25 @@ public class groupchat extends AppCompatActivity {
             public void onClick(View v) {
                 message = typedmessage.getText().toString();
 
-                typedmessage.setText("");
-                JSONObject info = new JSONObject();
-                try {
-                    info.put("id",uniqueId);
-                    info.put("username",username);
-                    info.put("message",message);
-                    mSocket.emit("grpMsg",info);
-                    MessageFormat format = new MessageFormat(uniqueId, username, message);
-                    messageAdapter.add(format);
-                } catch (JSONException e) { e.printStackTrace(); }
+                if (!TextUtils.isEmpty(message)) {
+                    vibe.vibrate(200);
+                    typedmessage.setText("");
+                    JSONObject info = new JSONObject();
+                    try {
+                        info.put("id", uniqueId);
+                        info.put("username", username);
+                        info.put("message", message);
+                        mSocket.emit("grpMsg", info);
+                        MessageFormat format = new MessageFormat(uniqueId, username, message);
+                        messageAdapter.add(format);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                {
+                    Toast.makeText(groupchat.this,"Write message",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

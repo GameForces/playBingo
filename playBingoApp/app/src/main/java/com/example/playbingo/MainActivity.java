@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Application;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         SocketHandler.setSocket(mSocket);
 
+        final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
 
         mSocket.connect();
         UserDatabase db = new UserDatabase(MainActivity.this);
@@ -72,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         PlayOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibe.vibrate(200);
 
                 e=1;
                 JSONObject info = new JSONObject();
@@ -104,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         PlayWithFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibe.vibrate(200);
                 Intent i = new Intent(MainActivity.this,playwithfriends.class);
                 i.putExtra("username",username);
                 startActivity(i);
@@ -114,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
         ChatRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibe.vibrate(200);
                 Intent i = new Intent(MainActivity.this,groupchat.class);
                 i.putExtra("username",username);
                 startActivity(i);
@@ -138,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject info = new JSONObject(data);
 
                         e=1;
+                        finish();
                         Intent i = new Intent(MainActivity.this,onlinegame.class);
                         i.putExtra("turn",info.getString("bool"));
                         i.putExtra("fuser",info.getString("fuser"));
@@ -146,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(i);
-                        finish();
+
                     }catch (JSONException er)
                     {
                         Toast.makeText(MainActivity.this,er.toString(),Toast.LENGTH_SHORT).show();

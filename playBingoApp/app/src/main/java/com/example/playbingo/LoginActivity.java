@@ -2,9 +2,11 @@ package com.example.playbingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,9 +49,13 @@ public class LoginActivity extends AppCompatActivity {
         InitializedFields();
 
 
+
+        final Vibrator vibe = (Vibrator) LoginActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
         regis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                vibe.vibrate(200);
                 Intent i= new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(i);
             }
@@ -60,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+
+                vibe.vibrate(200);
                 name  = username.getText().toString();
                 pass = password.getText().toString();
 
