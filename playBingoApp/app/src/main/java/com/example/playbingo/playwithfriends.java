@@ -108,6 +108,7 @@ public class playwithfriends extends AppCompatActivity {
                         Intent i = new Intent(playwithfriends.this,onlinegame.class);
                         i.putExtra("turn",info.getString("bool"));
                         i.putExtra("fuser",info.getString("fuser"));
+                        i.putExtra("username",username);
                         i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

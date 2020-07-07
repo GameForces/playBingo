@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
+
                 final ProgressDialog progressBar = new ProgressDialog(MainActivity.this);
                 progressBar.setMessage("finding oponents");
                 progressBar.setTitle("Matching");
@@ -140,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
                         Intent i = new Intent(MainActivity.this,onlinegame.class);
                         i.putExtra("turn",info.getString("bool"));
                         i.putExtra("fuser",info.getString("fuser"));
+                        i.putExtra("username",username);
                         i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".onlinegame"
     android:orientation="vertical"
-    android:background="@drawable/game_wallpaper"
-    android:alpha="0.6"
+    android:id="@+id/maing"
+    android:background="@drawable/gameback"
+
     >
 
+    <View
+        android:id="@+id/v1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        />
     <LinearLayout
+        android:id="@+id/l1"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:orientation="horizontal"
@@ -54,8 +62,10 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/l2"
+        android:layout_below="@+id/l1"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="400dp"
         android:orientation="vertical"
         >
 
@@ -65,7 +75,6 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="50dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="50dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -334,13 +343,26 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="165dp"
-        android:orientation="horizontal"
+
+    <TextView
+        android:layout_above="@+id/l4"
+        android:id="@+id/your_turn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text=""
+        android:layout_marginBottom="40dp"
+        android:textStyle="bold"
+        android:textColor="#f0ff00"
+        android:textSize="40dp"
         >
 
+    </TextView>
+
         <RelativeLayout
+            android:id="@+id/l4"
+            android:layout_marginBottom="15dp"
+            android:layout_above="@id/l3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -362,24 +384,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/sendmessage"
+                android:background="@android:color/holo_red_dark"
                 >
             </ImageButton>
-            <TextView
-                android:id="@+id/your_turn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/send_message_game"
-                android:layout_marginLeft="60dp"
-                android:layout_marginTop="60dp"
-                android:text=""
-                android:textColor="#860000"
-                android:textSize="30dp"
-                >
-
-            </TextView>
 
         </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/l3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+        <ImageButton
+            android:id="@+id/mode1"
+            android:layout_marginLeft="130dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <ImageButton
+            android:id="@+id/mode2"
+            android:layout_marginLeft="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>
