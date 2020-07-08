@@ -1025,9 +1025,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     if(e==1) {
                         msocket.emit("playerwin", info);
                     }
-                    mturn = false;
-                    totallinescount = 0;
-                    mturn = true;
 
                     String turn = getIntent().getStringExtra("turn");
 
