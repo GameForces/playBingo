@@ -3,7 +3,7 @@
     package="com.example.playbingo">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -12,11 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".groupchat"></activity>
-        <activity android:name=".onlinegame" android:launchMode= "singleInstance"></activity>
+        <activity android:name=".dailogloading"></activity>
+        <activity android:name=".groupchat" />
+        <activity
+            android:name=".onlinegame"
+            android:launchMode="singleInstance" />
         <activity android:name=".LoginActivity" />
-
         <activity android:name=".playwithfriends" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".SplashScreenActivity">
@@ -26,7 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

@@ -74,6 +74,11 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     private String fuser;
 
     private Vibrator vibe;
+    private TextView score1;
+    private TextView score2;
+    private String p1="0";
+    private String p2="0";
+
 
 
     private static int getNum(ArrayList<Integer> v) {
@@ -145,6 +150,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         }
 
 
+
         resources = R.drawable.gmecir;
         sendmessage.setBackgroundColor(Color.parseColor("#3498db"));
         Mode1.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +158,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             public void onClick(View v) {
 
 
-                vibe.vibrate(200);
+                vibe.vibrate(50);
                 Animation fadeIn = new AlphaAnimation(0, 1);
                 fadeIn.setInterpolator(new DecelerateInterpolator());
                 fadeIn.setDuration(1000);
@@ -186,7 +192,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onClick(View v) {
 
-                vibe.vibrate(200);
+                vibe.vibrate(50);
 
                 Animation fadeIn = new AlphaAnimation(0, 1);
                 fadeIn.setInterpolator(new DecelerateInterpolator());
@@ -219,6 +225,130 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
 
 
+        msocket.on("ocnt", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        p2 = args[0].toString();
+                        if(p2.equals("0"))
+                        {
+
+                            score2.setText("0");
+                        }
+                        else if(p2.equals("1"))
+                        {
+
+                            score2.setText("1");
+                        }
+                        else if(p2.equals("2"))
+                        {
+
+                            score2.setText("2");
+                        }
+                        else if(p2.equals("3"))
+                        {
+
+                            score2.setText("3");
+                        }
+                        else if(p2.equals("4"))
+                        {
+
+                            score2.setText("4");
+                        }
+                        else if(p2.equals("5"))
+                        {
+
+                            score2.setText("5");
+                        }
+                        else if(p2.equals("6"))
+                        {
+                            score2.setText("6");
+
+                        }
+                        else if(p2.equals("7"))
+                        {
+                            score2.setText("7");
+
+                        }
+                        else
+                        {
+                            score2.setText("8");
+
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+
+        msocket.on("cnt", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        p2 = args[0].toString();
+                        if(p2.equals("0"))
+                        {
+
+                            score1.setText("0");
+                        }
+                        else if(p2.equals("1"))
+                        {
+
+                            score1.setText("1");
+                        }
+                        else if(p2.equals("2"))
+                        {
+
+                            score1.setText("2");
+                        }
+                        else if(p2.equals("3"))
+                        {
+
+                            score1.setText("3");
+                        }
+                        else if(p2.equals("4"))
+                        {
+
+                            score1.setText("4");
+                        }
+                        else if(p2.equals("5"))
+                        {
+
+                            score1.setText("5");
+                        }
+                        else if(p2.equals("6"))
+                        {
+                            score1.setText("6");
+
+                        }
+                        else if(p2.equals("7"))
+                        {
+                            score1.setText("7");
+
+                        }
+                        else
+                        {
+                            score1.setText("8");
+
+                        }
+
+                    }
+                });
+
+            }
+        });
         msocket.on("LetsPlay",OnPaired);
         msocket.on("friendPairing",onfriendPairing);
         JSONObject info1 = new JSONObject();
@@ -288,7 +418,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         , Toast.LENGTH_SHORT).show();
                 */
 
-                vibe.vibrate(200);
+                vibe.vibrate(50);
                 String msg = typedmessage.getText().toString();
 
                 typedmessage.setText("");
@@ -325,6 +455,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     }
 
 
+
     private Emitter.Listener onlose = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -355,7 +486,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                             home.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    vibe.vibrate(200);
+                                    vibe.vibrate(50);
                                     Intent i  =new Intent(onlinegame.this,MainActivity.class);
                                     startActivity(i);
                                 }
@@ -364,7 +495,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onClick(View v) {
 
-                                    vibe.vibrate(200);
+                                    vibe.vibrate(50);
                                     JSONObject info = new JSONObject();
                                     try{
                                         info.put("username",username);
@@ -383,7 +514,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onClick(View v) {
 
-                                    vibe.vibrate(200);
+                                    vibe.vibrate(50);
                                     JSONObject info = new JSONObject();
                                     try {
                                         info.put("username", username);
@@ -463,7 +594,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onClick(View v) {
 
-                                    vibe.vibrate(200);
+                                    vibe.vibrate(50);
                                     Intent i  =new Intent(onlinegame.this,MainActivity.class);
                                     startActivity(i);
                                 }
@@ -473,7 +604,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onClick(View v) {
 
-                                    vibe.vibrate(200);
+                                    vibe.vibrate(50);
                                     JSONObject info = new JSONObject();
                                     try{
                                         info.put("username",username);
@@ -492,7 +623,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onClick(View v) {
 
-                                    vibe.vibrate(200);
+                                    vibe.vibrate(50);
                                     JSONObject info = new JSONObject();
                                     try {
                                         info.put("username", username);
@@ -598,6 +729,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
                     Toast.makeText(onlinegame.this, "Oponents Move: " + m, Toast.LENGTH_SHORT).show();
                     if (visited[x][y] == 0) {
+
                         a[x][y].setBackgroundResource(resources);
                         visited[x][y] = 1;
 
@@ -696,6 +828,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         maing = (RelativeLayout)findViewById(R.id.maing);
         view =(View)findViewById(R.id.v1);
         animFade = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+        score1 = (TextView)findViewById(R.id.p1score);
+        score2 = (TextView)findViewById(R.id.p2score);
     }
 
 
@@ -703,7 +837,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     public void onBackPressed() {
 
         super.onBackPressed();
-        vibe.vibrate(200);
+        vibe.vibrate(50);
 
         msocket.emit("over");
 
@@ -716,7 +850,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         e=1;
 
-        vibe.vibrate(200);
+        vibe.vibrate(50);
         if (playerturn) {
             int x = 0, y = 0;
             String vtag = v.getTag().toString();
@@ -801,6 +935,51 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 YourTurn.setText("");
 
 
+                if(totallinescount==0)
+                {
+
+                    score1.setText("0");
+                }
+                else if(totallinescount==1)
+                {
+
+                    score1.setText("1");
+                }
+                else if(totallinescount==2)
+                {
+
+                    score1.setText("2");
+                }
+                else if(totallinescount==3)
+                {
+
+                    score1.setText("3");
+                }
+                else if(totallinescount==4)
+                {
+
+                    score1.setText("4");
+                }
+                else if(totallinescount==5)
+                {
+
+                    score1.setText("5");
+                }
+                else if(totallinescount==6)
+                {
+                    score1.setText("6");
+
+                }
+                else if(totallinescount==7)
+                {
+                    score1.setText("7");
+
+                }
+                else
+                {
+                    score1.setText("8");
+
+                }
                 if (totallinescount > 4) {
                     playerturn = false;
                     for (int i = 1; i <= 5; i++) {

@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                vibe.vibrate(200);
+                vibe.vibrate(50);
                 Intent i= new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(i);
             }
@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v)
             {
 
-                vibe.vibrate(200);
+                vibe.vibrate(50);
                 name  = username.getText().toString();
                 pass = password.getText().toString();
 

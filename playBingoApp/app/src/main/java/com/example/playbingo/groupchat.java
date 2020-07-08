@@ -72,7 +72,7 @@ public class groupchat extends AppCompatActivity {
                 message = typedmessage.getText().toString();
 
                 if (!TextUtils.isEmpty(message)) {
-                    vibe.vibrate(200);
+                    vibe.vibrate(50);
                     typedmessage.setText("");
                     JSONObject info = new JSONObject();
                     try {
