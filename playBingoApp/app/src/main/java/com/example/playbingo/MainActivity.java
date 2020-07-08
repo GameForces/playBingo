@@ -2,14 +2,20 @@ package com.example.playbingo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.Application;
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView ChatRoom;
     private Socket mSocket;
     private int e=0;
+    private Button dailogcircle1;
+    private Button dailogcircle2;
+    private Button dailogcircle3;
     {
         try {
             mSocket = IO.socket("https://obscure-reaches-99859.herokuapp.com/");
@@ -47,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         SocketHandler.setSocket(mSocket);
 
+        final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
 
         mSocket.connect();
         UserDatabase db = new UserDatabase(MainActivity.this);
@@ -67,35 +77,28 @@ public class MainActivity extends AppCompatActivity {
         toast.setView(layout);
         toast.show();
 
-        mSocket.on("LetsPlay",OnPaired);
 
         PlayOnline.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibe.vibrate(50);
 
                 e=1;
                 JSONObject info = new JSONObject();
                 try {
                     info.put("username", username);
 
-                    mSocket.emit("playOnlineRequest",info);} catch (JSONException e) {
+                    mSocket.emit("playOnlineRequest",info);
+                    Intent i=new Intent(MainActivity.this,dailogloading.class);
+                    i.putExtra("username",username);
+                    startActivity(i);
+
+                } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
-                final ProgressDialog progressBar = new ProgressDialog(MainActivity.this);
-                progressBar.setMessage("finding oponents");
-                progressBar.setTitle("Matching");
-                progressBar.show();
-
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                    }
-                }, 20000);
-
             }
+
         });
 
 
@@ -103,6 +106,7 @@ public class MainActivity extends AppCompatActivity {
         PlayWithFriends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibe.vibrate(50);
                 Intent i = new Intent(MainActivity.this,playwithfriends.class);
                 i.putExtra("username",username);
                 startActivity(i);
@@ -113,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         ChatRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                vibe.vibrate(50);
                 Intent i = new Intent(MainActivity.this,groupchat.class);
                 i.putExtra("username",username);
                 startActivity(i);
@@ -125,36 +130,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private Emitter.Listener OnPaired = new Emitter.Listener() {
-        @Override
-        public void call(final Object... args) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
 
-                    String data = args[0].toString();
-                    try {
-                        JSONObject info = new JSONObject(data);
 
-                        e=1;
-                        Intent i = new Intent(MainActivity.this,onlinegame.class);
-                        i.putExtra("turn",info.getString("bool"));
-                        i.putExtra("fuser",info.getString("fuser"));
-                        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(i);
-                        finish();
-                    }catch (JSONException er)
-                    {
-                        Toast.makeText(MainActivity.this,er.toString(),Toast.LENGTH_SHORT).show();
-                        er.printStackTrace();
-                    }
-
-                }
-            });
-        }
-    };
 
 
     private void Initializefields()
@@ -162,5 +139,6 @@ public class MainActivity extends AppCompatActivity {
         PlayOnline = (TextView)findViewById(R.id.play_online);
         PlayWithFriends = (TextView)findViewById(R.id.play_with_friends);
         ChatRoom = (TextView)findViewById(R.id.chat_room);
+
     }
 }

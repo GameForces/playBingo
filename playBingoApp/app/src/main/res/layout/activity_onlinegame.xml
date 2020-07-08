@@ -1,65 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".onlinegame"
     android:orientation="vertical"
-    android:background="@drawable/game_wallpaper"
+    android:id="@+id/maing"
+    android:background="@drawable/gameback"
 
     >
 
+    <View
+        android:id="@+id/v1"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        />
     <LinearLayout
+        android:id="@+id/l1"
         android:layout_width="match_parent"
         android:layout_height="140dp"
         android:orientation="horizontal"
         >
         <LinearLayout
+            android:layout_marginLeft="100dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="You"
-                android:textColor="#FFFFFF"
-                android:gravity="center"
-                android:layout_weight="1"
-                android:textSize="30dp"
-
+                android:orientation="vertical"
                 >
 
-            </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="You"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="30dp"
 
-            <TextView
-                android:id="@+id/fusername"
+                    >
+
+                </TextView>
+                <TextView
+                    android:id="@+id/p1score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="30dp"
+
+                    >
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginLeft="80dp"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Player 1"
-                android:textColor="#FFFFFF"
-                android:textSize="30dp"
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
                 >
 
-            </TextView>
+
+                <TextView
+                    android:id="@+id/fusername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Player 1"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30dp"
+
+                    >
+
+                </TextView>
+                <TextView
+                    android:id="@+id/p2score"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="0"
+                    android:textColor="#FFFFFF"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:textSize="30dp"
+
+                    >
+
+                </TextView>
+
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical"
-        >
-
         <LinearLayout
+
+            android:layout_centerInParent="true"
+            android:id="@+id/l2"
+            android:layout_below="@+id/l1"
             android:layout_width="315dp"
             android:layout_height="350dp"
             android:layout_marginLeft="20dp"
@@ -331,30 +384,27 @@
 
         </LinearLayout>
 
-    </LinearLayout>
 
 
     <TextView
-        android:layout_above="@+id/bott"
+        android:layout_above="@+id/l4"
         android:id="@+id/your_turn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="60dp"
+        android:layout_centerHorizontal="true"
         android:text=""
         android:layout_marginBottom="40dp"
-        android:textColor="#F0FF00"
-        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="#f0ff00"
+        android:textSize="40dp"
         >
 
     </TextView>
-    <LinearLayout
-        android:id="@+id/bott"
-        android:layout_width="match_parent"
-        android:layout_height="165dp"
-        android:orientation="horizontal"
-        >
 
         <RelativeLayout
+            android:id="@+id/l4"
+            android:layout_marginBottom="15dp"
+            android:layout_above="@id/l3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -367,6 +417,8 @@
                 android:layout_marginStart="41dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:textColorHint="#ffffff"
+                android:textColor="#ffffff"
                 android:hint="send message"></EditText>
 
             <ImageButton
@@ -381,7 +433,28 @@
             </ImageButton>
 
         </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/l3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+        <ImageButton
+            android:id="@+id/mode1"
+            android:background="@drawable/game_wallpaper"
+            android:layout_marginLeft="130dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+        <ImageButton
+            android:background="@drawable/gameback"
+            android:id="@+id/mode2"
+            android:layout_marginLeft="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+
+
     </LinearLayout>
 
 
-</LinearLayout>
+</RelativeLayout>

@@ -1,17 +1,34 @@
 package com.example.playbingo;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
+import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +45,8 @@ import java.net.URISyntaxException;
 import java.util.*;
 import java.lang.Math;
 
+import static java.security.AccessController.getContext;
+
 
 public class onlinegame extends AppCompatActivity implements View.OnClickListener {
 
@@ -42,6 +61,25 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     private int e=0;
     private TextView YourTurn;
     private TextView Fuser;
+    private ImageButton Mode1,Mode2;
+    private RelativeLayout maing;
+    private int resources;
+    private View view;
+    private Animation animFade;
+    private TextView playonline;
+    private TextView home;
+    private TextView replay;
+    private String username;
+    private String turn;
+    private String fuser;
+
+    private Vibrator vibe;
+    private TextView score1;
+    private TextView score2;
+    private String p1="0";
+    private String p2="0";
+
+
 
     private static int getNum(ArrayList<Integer> v) {
         int n = v.size();
@@ -69,10 +107,21 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         e=0;
         intializedfields();
 
+        vibe = (Vibrator) onlinegame.this.getSystemService(Context.VIBRATOR_SERVICE);
+
         msocket=SocketHandler.getSocket();
 
+        Animation fadeIn = new AlphaAnimation(0, 1);
+        fadeIn.setInterpolator(new DecelerateInterpolator());
+        fadeIn.setDuration(1000);
+
+        maing.setAnimation(fadeIn);
 
         turnfluc();
+
+        ObjectAnimator animation = ObjectAnimator.ofFloat(view, "translationX", 100f);
+        animation.setDuration(2000);
+        animation.start();
 
         totallinescount = 0;
         playerturn = false;
@@ -81,9 +130,10 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         ArrayList<Integer> v = new ArrayList<>(n);
         generateRandom(25, v);
 
-        String turn = getIntent().getStringExtra("turn");
-        String fuser  = getIntent().getStringExtra("fuser");
+        turn = getIntent().getStringExtra("turn");
+        fuser  = getIntent().getStringExtra("fuser");
 
+        username = getIntent().getStringExtra("username");
         Fuser.setText(fuser);
 
         if (turn.equals("true")) {
@@ -99,6 +149,208 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             }
         }
 
+
+
+        resources = R.drawable.gmecir;
+        sendmessage.setBackgroundColor(Color.parseColor("#3498db"));
+        Mode1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                vibe.vibrate(50);
+                Animation fadeIn = new AlphaAnimation(0, 1);
+                fadeIn.setInterpolator(new DecelerateInterpolator());
+                fadeIn.setDuration(1000);
+
+                maing.setAnimation(fadeIn);
+                maing.setBackgroundResource(R.drawable.game_wallpaper);
+
+                for(int i=0;i<5;i++)
+                {
+                    for(int j=0;j<5;j++)
+                    {
+                        if(visited[i][j]==1)
+                        {
+                            a[i][j].setBackgroundResource(R.drawable.gamecircledaymode);
+                        }
+                        else if(visited[i][j]==2)
+                        {
+                            a[i][j].setBackgroundResource(R.drawable.gamecircle2);
+                        }
+                        else
+                        {
+                            a[i][j].setBackgroundResource(R.drawable.gamedaymode1);
+                        }
+                    }
+                }
+                resources = R.drawable.gamecircledaymode;
+                sendmessage.setBackgroundColor(Color.parseColor("#ff0000"));
+            }
+        });
+        Mode2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                vibe.vibrate(50);
+
+                Animation fadeIn = new AlphaAnimation(0, 1);
+                fadeIn.setInterpolator(new DecelerateInterpolator());
+                fadeIn.setDuration(1000);
+
+                maing.setAnimation(fadeIn);
+                maing.setBackgroundResource(R.drawable.gameback);
+                for(int i=0;i<5;i++)
+                {
+                    for(int j=0;j<5;j++)
+                    {
+                        if(visited[i][j]==1)
+                        {
+                            a[i][j].setBackgroundResource(R.drawable.gmecir);
+                        }
+                        else if(visited[i][j]==2)
+                        {
+                            a[i][j].setBackgroundResource(R.drawable.gamecirclelast);
+                        }
+                        else
+                        {
+                            a[i][j].setBackgroundResource(R.drawable.gamecircle);
+                        }
+                    }
+                }
+                resources = R.drawable.gmecir;
+                sendmessage.setBackgroundColor(Color.parseColor("#3498db"));
+            }
+        });
+
+
+
+        msocket.on("ocnt", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        p2 = args[0].toString();
+                        if(p2.equals("0"))
+                        {
+
+                            score2.setText("0");
+                        }
+                        else if(p2.equals("1"))
+                        {
+
+                            score2.setText("1");
+                        }
+                        else if(p2.equals("2"))
+                        {
+
+                            score2.setText("2");
+                        }
+                        else if(p2.equals("3"))
+                        {
+
+                            score2.setText("3");
+                        }
+                        else if(p2.equals("4"))
+                        {
+
+                            score2.setText("4");
+                        }
+                        else if(p2.equals("5"))
+                        {
+
+                            score2.setText("5");
+                        }
+                        else if(p2.equals("6"))
+                        {
+                            score2.setText("6");
+
+                        }
+                        else if(p2.equals("7"))
+                        {
+                            score2.setText("7");
+
+                        }
+                        else
+                        {
+                            score2.setText("8");
+
+                        }
+
+                    }
+                });
+
+            }
+        });
+
+
+        msocket.on("cnt", new Emitter.Listener() {
+            @Override
+            public void call(final Object... args) {
+
+                runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        p2 = args[0].toString();
+                        if(p2.equals("0"))
+                        {
+
+                            score1.setText("0");
+                        }
+                        else if(p2.equals("1"))
+                        {
+
+                            score1.setText("1");
+                        }
+                        else if(p2.equals("2"))
+                        {
+
+                            score1.setText("2");
+                        }
+                        else if(p2.equals("3"))
+                        {
+
+                            score1.setText("3");
+                        }
+                        else if(p2.equals("4"))
+                        {
+
+                            score1.setText("4");
+                        }
+                        else if(p2.equals("5"))
+                        {
+
+                            score1.setText("5");
+                        }
+                        else if(p2.equals("6"))
+                        {
+                            score1.setText("6");
+
+                        }
+                        else if(p2.equals("7"))
+                        {
+                            score1.setText("7");
+
+                        }
+                        else
+                        {
+                            score1.setText("8");
+
+                        }
+
+                    }
+                });
+
+            }
+        });
+        msocket.on("LetsPlay",OnPaired);
+        msocket.on("friendPairing",onfriendPairing);
         JSONObject info1 = new JSONObject();
         try {
             info1.put("a11", a[0][0].getText().toString());
@@ -165,8 +417,11 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 + visited[4][2] + " " + visited[4][3] + " " + visited[4][4] + "\n"
                         , Toast.LENGTH_SHORT).show();
                 */
+
+                vibe.vibrate(50);
                 String msg = typedmessage.getText().toString();
 
+                typedmessage.setText("");
                 JSONObject info = new JSONObject();
                 try {
                     info.put("message", msg);
@@ -181,13 +436,13 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     private void turnfluc()
     {
         int color = YourTurn.getCurrentTextColor();
-        if(color ==Color.parseColor("#94ff87"))
+        if(color ==Color.parseColor("#f0ff00"))
         {
-            YourTurn.setTextColor(Color.parseColor("#860000"));
+            YourTurn.setTextColor(Color.parseColor("#0003ff"));
         }
-        if(color == Color.parseColor("#860000"))
+        if(color == Color.parseColor("#0003ff"))
         {
-            YourTurn.setTextColor(Color.parseColor("#94ff87"));
+            YourTurn.setTextColor(Color.parseColor("#f0ff00"));
         }
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -200,29 +455,189 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     }
 
 
+
     private Emitter.Listener onlose = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(onlinegame.this, "YOU LOSE", Toast.LENGTH_SHORT).show();
+                    YourTurn.setText("YOU LOSE");
+                    msocket.emit("over");
                     mturn = false;
                     e=0;
+
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(onlinegame.this);
+                            dialog.setContentView(R.layout.endgamedailog);
+                            dialog.setCanceledOnTouchOutside(false);
+
+                            if(!((Activity) onlinegame.this).isFinishing()) {
+                                dialog.show();
+                            }
+                            replay = (TextView)dialog.findViewById(R.id.game_replay);
+                            playonline = (TextView)dialog.findViewById(R.id.game_play_online);
+                            home = (TextView)dialog.findViewById(R.id.game_go_home);
+
+
+                            home.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    vibe.vibrate(50);
+                                    Intent i  =new Intent(onlinegame.this,MainActivity.class);
+                                    startActivity(i);
+                                }
+                            });
+                            replay.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    vibe.vibrate(50);
+                                    JSONObject info = new JSONObject();
+                                    try{
+                                        info.put("username",username);
+                                        info.put("fusername",fuser);
+                                        msocket.emit("friendRequest",info);
+                                    }catch (JSONException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
+
+
+                            playonline.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    vibe.vibrate(50);
+                                    JSONObject info = new JSONObject();
+                                    try {
+                                        info.put("username", username);
+
+                                        msocket.emit("playOnlineRequest",info);} catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+
+                        }
+                    }, 5000);
+
                 }
 
             });
         }
     };
 
+    private Emitter.Listener onfriendPairing = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    String data = args[0].toString();
+                    try
+                    {
+                        JSONObject info = new JSONObject(data);
+                        finish();
+                        Intent i = new Intent(onlinegame.this,onlinegame.class);
+                        i.putExtra("turn",info.getString("bool"));
+                        i.putExtra("fuser",info.getString("fuser"));
+                        i.putExtra("username",username);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                    }catch (JSONException er)
+                    {
+                        er.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
     private Emitter.Listener onwin = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(onlinegame.this, "YOU WIN", Toast.LENGTH_SHORT).show();
+                    YourTurn.setText("YOU WIN");
+                    msocket.emit("over");
                     mturn = false;
+
+                    final Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            final Dialog dialog = new Dialog(onlinegame.this);
+                            dialog.setContentView(R.layout.endgamedailog);
+                            dialog.setCanceledOnTouchOutside(false);
+
+                            if(!((Activity) onlinegame.this).isFinishing()) {
+                                dialog.show();
+                            }
+
+                            replay = (TextView)dialog.findViewById(R.id.game_replay);
+                            playonline = (TextView)dialog.findViewById(R.id.game_play_online);
+                            home = (TextView)dialog.findViewById(R.id.game_go_home);
+
+
+                            home.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    vibe.vibrate(50);
+                                    Intent i  =new Intent(onlinegame.this,MainActivity.class);
+                                    startActivity(i);
+                                }
+                            });
+
+                            replay.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    vibe.vibrate(50);
+                                    JSONObject info = new JSONObject();
+                                    try{
+                                        info.put("username",username);
+                                        info.put("fusername",fuser);
+                                        msocket.emit("friendRequest",info);
+                                    }catch (JSONException e)
+                                    {
+                                        e.printStackTrace();
+                                    }
+
+                                }
+                            });
+
+
+                            playonline.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+
+                                    vibe.vibrate(50);
+                                    JSONObject info = new JSONObject();
+                                    try {
+                                        info.put("username", username);
+
+                                        msocket.emit("playOnlineRequest",info);} catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
+
+
+                        }
+                    }, 5000);
+
                     e=0;
 
                 }
@@ -250,6 +665,39 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             });
         }
     };
+
+
+    private Emitter.Listener OnPaired = new Emitter.Listener() {
+        @Override
+        public void call(final Object... args) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                    String data = args[0].toString();
+                    try {
+                        JSONObject info = new JSONObject(data);
+
+                        e=1;
+                        finish();
+                        Intent i = new Intent(onlinegame.this,onlinegame.class);
+                        i.putExtra("turn",info.getString("bool"));
+                        i.putExtra("fuser",info.getString("fuser"));
+                        i.putExtra("username",username);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                    }catch (JSONException er)
+                    {
+                        er.printStackTrace();
+                    }
+
+                }
+            });
+        }
+    };
+
     private Emitter.Listener onmove = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -281,58 +729,77 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
                     Toast.makeText(onlinegame.this, "Oponents Move: " + m, Toast.LENGTH_SHORT).show();
                     if (visited[x][y] == 0) {
-                        a[x][y].setBackgroundColor(Color.parseColor("#ff0000"));
+
+                        a[x][y].setBackgroundResource(resources);
                         visited[x][y] = 1;
 
                         int cnt = 0;
-                        for (int i = 0; i < 5; i++) {
-                            cnt += visited[x][i];
+                        for (int i = 0; i < 5; i++)
+                        {
+                            if(visited[x][i]>0)
+                            {
+                                cnt += 1;
+                            }
                         }
                         if (cnt == 5) {
                             totallinescount += 1;
                             for (int i = 0; i < 5; i++) {
-                                a[x][i].setBackgroundColor(Color.parseColor("#4a235a"));
+                                a[x][i].setBackgroundResource(R.drawable.gamecirclelast);
+                                visited[x][i]=2;
                             }
                         }
 
                         cnt = 0;
                         for (int i = 0; i < 5; i++) {
-                            cnt += visited[i][y];
+                            if(visited[i][y]>0)
+                            {
+                                cnt += 1;
+                            }
                         }
                         if (cnt == 5) {
                             totallinescount += 1;
                             for (int i = 0; i < 5; i++) {
-                                a[i][y].setBackgroundColor(Color.parseColor("#4a235a"));
+                                a[i][y].setBackgroundResource(R.drawable.gamecirclelast);
+                                visited[i][y]=2;
                             }
                         }
                         if (x + y == 4) {
                             cnt = 0;
                             for (int i = 0; i < 5; i++) {
-                                cnt += visited[4 - i][i];
+                                if(visited[4 - i][i]>0)
+                                {
+                                    cnt += 1;
+                                }
                             }
                             if (cnt == 5) {
                                 totallinescount += 1;
                                 for (int i = 0; i < 5; i++) {
-                                    a[4 - i][i].setBackgroundColor(Color.parseColor("#4a235a"));
+                                    a[4-i][i].setBackgroundResource(R.drawable.gamecirclelast);
+                                    visited[4-i][i]=2;
                                 }
                             }
                         }
                         if (x == y) {
                             cnt = 0;
                             for (int i = 0; i < 5; i++) {
-                                cnt += visited[i][i];
+                                if(visited[i][i]>0)
+                                {
+                                    cnt += 1;
+                                }
                             }
                             if (cnt == 5) {
                                 totallinescount ++;
                                 for (int i = 0; i < 5; i++) {
-                                    a[i][i].setBackgroundColor(Color.parseColor("#4a235a"));
+                                    a[i][i].setBackgroundResource(R.drawable.gamecirclelast);
+                                    visited[i][i]=2;
                                 }
                             }
                         }
                     }
 
 
-                    if (mturn) {
+                    if (mturn)
+                    {
                         playerturn = true;
 
                         YourTurn.setText("Your Turn");
@@ -352,11 +819,17 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 a[i - 1][j - 1].setOnClickListener(this);
             }
         }
+        Mode1 =(ImageButton) findViewById(R.id.mode1);
+        Mode2 =(ImageButton) findViewById(R.id.mode2);
         YourTurn = (TextView) findViewById(R.id.your_turn);
         typedmessage = (EditText) findViewById(R.id.send_message_in_game);
         sendmessage = (ImageButton) findViewById(R.id.send_message_game);
         Fuser = (TextView)findViewById(R.id.fusername);
-
+        maing = (RelativeLayout)findViewById(R.id.maing);
+        view =(View)findViewById(R.id.v1);
+        animFade = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+        score1 = (TextView)findViewById(R.id.p1score);
+        score2 = (TextView)findViewById(R.id.p2score);
     }
 
 
@@ -364,16 +837,21 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     public void onBackPressed() {
 
         super.onBackPressed();
-        finish();
+        vibe.vibrate(50);
+
+        msocket.emit("over");
+
         Intent i = new Intent(onlinegame.this,MainActivity.class);
         startActivity(i);
+
     }
 
     @Override
     public void onClick(View v) {
         e=1;
+
+        vibe.vibrate(50);
         if (playerturn) {
-            YourTurn.setText("");
             int x = 0, y = 0;
             String vtag = v.getTag().toString();
             for (int i = 0; i < 5; i++) {
@@ -387,59 +865,123 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
             Toast.makeText(onlinegame.this, a[x][y].getText().toString(), Toast.LENGTH_SHORT).show();
             if (visited[x][y] == 0) {
-                a[x][y].setBackgroundColor(Color.parseColor("#ff0000"));
+                a[x][y].setBackgroundResource(resources);
                 visited[x][y] = 1;
+
                 int cnt = 0;
-                for (int i = 0; i < 5; i++) {
-                    cnt += visited[x][i];
+                for (int i = 0; i < 5; i++)
+                {
+                    if(visited[x][i]>0)
+                    {
+                        cnt += 1;
+                    }
                 }
                 if (cnt == 5) {
                     totallinescount += 1;
                     for (int i = 0; i < 5; i++) {
-                        a[x][i].setBackgroundColor(Color.parseColor("#4a235a"));
+                        a[x][i].setBackgroundResource(R.drawable.gamecirclelast);
+                        visited[x][i]=2;
                     }
                 }
 
                 cnt = 0;
                 for (int i = 0; i < 5; i++) {
-                    cnt += visited[i][y];
+                    if(visited[i][y]>0)
+                    {
+                        cnt += 1;
+                    }
                 }
                 if (cnt == 5) {
                     totallinescount += 1;
                     for (int i = 0; i < 5; i++) {
-                        a[i][y].setBackgroundColor(Color.parseColor("#4a235a"));
+                        a[i][y].setBackgroundResource(R.drawable.gamecirclelast);
+                        visited[i][y]=2;
+
                     }
                 }
                 if (x + y == 4) {
                     cnt = 0;
                     for (int i = 0; i < 5; i++) {
-                        cnt += visited[4 - i][i];
+                        if(visited[4 - i][i]>0)
+                        {
+                            cnt += 1;
+                        }
                     }
                     if (cnt == 5) {
                         totallinescount += 1;
                         for (int i = 0; i < 5; i++) {
-                            a[4 - i][i].setBackgroundColor(Color.parseColor("#4a235a"));
+                            a[4-i][i].setBackgroundResource(R.drawable.gamecirclelast);
+                            visited[4-i][i]=2;
                         }
                     }
                 }
                 if (x == y) {
                     cnt = 0;
                     for (int i = 0; i < 5; i++) {
-                        cnt += visited[i][i];
+                        if(visited[i][i]>0)
+                        {
+                            cnt += 1;
+                        }
                     }
                     if (cnt == 5) {
-                        totallinescount += 1;
+                        totallinescount ++;
                         for (int i = 0; i < 5; i++) {
-                            a[i][i].setBackgroundColor(Color.parseColor("#000000"));
+                            a[i][i].setBackgroundResource(R.drawable.gamecirclelast);
+                            visited[i][i]=2;
                         }
                     }
                 }
 
+                YourTurn.setText("");
 
+
+                if(totallinescount==0)
+                {
+
+                    score1.setText("0");
+                }
+                else if(totallinescount==1)
+                {
+
+                    score1.setText("1");
+                }
+                else if(totallinescount==2)
+                {
+
+                    score1.setText("2");
+                }
+                else if(totallinescount==3)
+                {
+
+                    score1.setText("3");
+                }
+                else if(totallinescount==4)
+                {
+
+                    score1.setText("4");
+                }
+                else if(totallinescount==5)
+                {
+
+                    score1.setText("5");
+                }
+                else if(totallinescount==6)
+                {
+                    score1.setText("6");
+
+                }
+                else if(totallinescount==7)
+                {
+                    score1.setText("7");
+
+                }
+                else
+                {
+                    score1.setText("8");
+
+                }
                 if (totallinescount > 4) {
-
                     playerturn = false;
-
                     for (int i = 1; i <= 5; i++) {
                         for (int j = 1; j <= 5; j++) {
                             visited[i - 1][j - 1] = 0;
@@ -486,9 +1028,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     mturn = false;
                     totallinescount = 0;
                     mturn = true;
-                    int n = 25;
-                    ArrayList<Integer> vv = new ArrayList<>(n);
-                    generateRandom(25, vv);
 
                     String turn = getIntent().getStringExtra("turn");
 
@@ -496,19 +1035,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         playerturn = true;
                     }
 
-                    int k = 0;
-                    for (int i = 0; i < 5; i++) {
-                        for (int j = 0; j < 5; j++) {
-                            a[i][j].setText(vv.get(k).toString());
-                            k++;
-                        }
-                    }
-
-                    for (int i = 1; i <= 5; i++) {
-                        for (int j = 1; j <= 5; j++) {
-                            visited[i - 1][j - 1] = 0;
-                        }
-                    }
 
                 }
                 playerturn = false;
@@ -517,6 +1043,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     info.put("number", a[x][y].getText().toString());
                     info.put("x", x);
                     info.put("y", y);
+                    info.put("cnt",totallinescount);
 
                     if(e==1) {
                         msocket.emit("playermove", info);

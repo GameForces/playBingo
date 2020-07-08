@@ -3,9 +3,11 @@ package com.example.playbingo;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +46,7 @@ public class playwithfriends extends AppCompatActivity {
 
         mSocket=SocketHandler.getSocket();
 
+        final Vibrator vibe = (Vibrator) playwithfriends.this.getSystemService(Context.VIBRATOR_SERVICE);
 
         mSocket.on("friendPairing",onfriendPairing);
 
@@ -105,14 +108,15 @@ public class playwithfriends extends AppCompatActivity {
                     try {
                         JSONObject info = new JSONObject(data);
 
+                        finish();
                         Intent i = new Intent(playwithfriends.this,onlinegame.class);
                         i.putExtra("turn",info.getString("bool"));
                         i.putExtra("fuser",info.getString("fuser"));
+                        i.putExtra("username",username);
                         i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(i);
-                        finish();
                     }catch (JSONException er)
                     {
                         er.printStackTrace();
