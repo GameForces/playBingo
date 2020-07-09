@@ -79,91 +79,90 @@ public class MainActivity extends AppCompatActivity {
         } catch (URISyntaxException e) {}
     }
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Initializefields();
-        mSocket.connect();
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            Initializefields();
+            mSocket.connect();
 
 
 
-        doit();
+            doit();
 
 
-        SocketHandler.setSocket(mSocket);
+            SocketHandler.setSocket(mSocket);
 
-        final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
+            final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
 
-        mSocket.connect();
-        UserDatabase db = new UserDatabase(MainActivity.this);
-        username = db.getcurrentuser();
+            mSocket.connect();
+            UserDatabase db = new UserDatabase(MainActivity.this);
+            username = db.getcurrentuser();
 
-        if(TextUtils.isEmpty(username))
-        {
-            Intent i = new Intent(MainActivity.this,RegisterActivity.class);
-            startActivity(i);
-        }
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.custum_toast, null);
-        TextView text = (TextView) layout.findViewById(R.id.meage);
-
-        text.setText("Welcome "+username);
-        Toast toast = new Toast(MainActivity.this);
-        toast.setDuration(Toast.LENGTH_SHORT);
-        toast.setView(layout);
-        toast.show();
+            if(TextUtils.isEmpty(username))
+            {
+                Intent i = new Intent(MainActivity.this,RegisterActivity.class);
+                startActivity(i);
+            }
 
 
-        PlayOnline.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vibe.vibrate(50);
+            PlayOnline.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    vibe.vibrate(50);
 
-                e=1;
-                JSONObject info = new JSONObject();
-                try {
-                    info.put("username", username);
+                    e=1;
+                    JSONObject info = new JSONObject();
+                    try {
+                        info.put("username", username);
 
-                    mSocket.emit("playOnlineRequest",info);
-                    Intent i=new Intent(MainActivity.this,dailogloading.class);
-                    i.putExtra("username",username);
-                    startActivity(i);
+                        mSocket.emit("playOnlineRequest",info);
+                        Intent i=new Intent(MainActivity.this,dailogloading.class);
+                        i.putExtra("username",username);
+                        startActivity(i);
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
 
-            }
-
-        });
+            });
 
 
 
-        PlayWithFriends.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vibe.vibrate(50);
-                Intent i = new Intent(MainActivity.this,playwithfriends.class);
-                i.putExtra("username",username);
-                startActivity(i);
-            }
-        });
+            PlayWithFriends.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    vibe.vibrate(50);
+                    Intent i = new Intent(MainActivity.this,playwithfriends.class);
+                    i.putExtra("username",username);
+                    startActivity(i);
+                }
+            });
 
 
-        ChatRoom.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vibe.vibrate(50);
-                Intent i = new Intent(MainActivity.this,groupchat.class);
-                i.putExtra("username",username);
-                startActivity(i);
-            }
-        });
+            ChatRoom.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    vibe.vibrate(50);
+                    Intent i = new Intent(MainActivity.this,groupchat.class);
+                    i.putExtra("username",username);
+                    startActivity(i);
+                }
+            });
 
 
 
+            findfriends.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    vibe.vibrate(50);
+                    Intent i =new Intent(MainActivity.this,findfriends.class);
+                    startActivity(i);
+                }
+            });
 
-    }
+        }
 
     private void doit()
     {
@@ -415,7 +414,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 doit();
             }
-        },200);
+        },100);
     }
 
 
