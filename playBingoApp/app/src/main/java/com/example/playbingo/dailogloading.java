@@ -24,11 +24,7 @@ public class dailogloading extends AppCompatActivity {
     private Socket mSocket;
     private String username;
     private int e= 1;
-    {
-        try {
-            mSocket = IO.socket("https://obscure-reaches-99859.herokuapp.com/");
-        } catch (URISyntaxException e) {}
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +32,7 @@ public class dailogloading extends AppCompatActivity {
         setContentView(R.layout.activity_dailogloading);
 
 
+        mSocket=SocketHandler.getSocket();
 
         dailogcircle1 = (Button) findViewById(R.id.circle1);
         dailogcircle2 = (Button) findViewById(R.id.circle2);

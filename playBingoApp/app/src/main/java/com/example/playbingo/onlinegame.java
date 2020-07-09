@@ -463,7 +463,15 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void run() {
                     YourTurn.setText("YOU LOSE");
-                    msocket.emit("over");
+                    try {
+                        JSONObject info = new JSONObject();
+                        info.put("username",username);
+                        info.put("wins",0);
+                        msocket.emit("over",info);
+                    }catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
                     mturn = false;
                     e=0;
 
@@ -570,7 +578,15 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void run() {
                     YourTurn.setText("YOU WIN");
-                    msocket.emit("over");
+                    try {
+                        JSONObject info =new JSONObject();
+                        info.put("username",username);
+                        info.put("wins",1);
+                        msocket.emit("over",info);
+                    }catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
                     mturn = false;
 
                     final Handler handler = new Handler();
@@ -838,8 +854,15 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
         super.onBackPressed();
         vibe.vibrate(50);
-
-        msocket.emit("over");
+        try {
+            JSONObject info =new JSONObject();
+            info.put("username",username);
+            info.put("wins",0);
+            msocket.emit("over",info);
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
 
         Intent i = new Intent(onlinegame.this,MainActivity.class);
         startActivity(i);
@@ -1018,6 +1041,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         info.put("a54", visited[4][3]);
                         info.put("a55", visited[4][4]);
                         info.put("e", e);
+                        info.put("username",username);
                     }catch (JSONException e)
                     {
                         e.printStackTrace();
@@ -1025,9 +1049,6 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     if(e==1) {
                         msocket.emit("playerwin", info);
                     }
-                    mturn = false;
-                    totallinescount = 0;
-                    mturn = true;
 
                     String turn = getIntent().getStringExtra("turn");
 
@@ -1044,6 +1065,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     info.put("x", x);
                     info.put("y", y);
                     info.put("cnt",totallinescount);
+                    info.put("fusername",fuser);
 
                     if(e==1) {
                         msocket.emit("playermove", info);
