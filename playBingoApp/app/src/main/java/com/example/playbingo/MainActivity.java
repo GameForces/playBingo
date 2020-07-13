@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -73,6 +74,14 @@ public class MainActivity extends AppCompatActivity {
     private CircleImageView o4;
     private CircleImageView o5;
     private int oo=6;
+    private ImageView setting;
+    private ImageView info;
+    private ImageView settingclose;
+    private int vib;
+    private TextView soff;
+    private TextView son;
+    private TextView voff;
+    private TextView von;
     {
         try {
             mSocket = IO.socket("https://obscure-reaches-99859.herokuapp.com/");
@@ -89,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
             doit();
 
-
+            vib=vibratefreq.getvib();
             SocketHandler.setSocket(mSocket);
 
             final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
@@ -105,10 +114,54 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+            setting.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Dialog dialog = new Dialog(MainActivity.this);
+                    dialog.setContentView(R.layout.settinglayout);
+                    dialog.setCanceledOnTouchOutside(false);
+
+                    settingclose = (ImageView)dialog.findViewById(R.id.closedailogsetting);
+                    settingclose.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.cancel();
+                        }
+                    });
+
+                    voff=(TextView)dialog.findViewById(R.id.voff);
+                    von=(TextView)dialog.findViewById(R.id.von);
+
+                    voff.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            vibratefreq.setvib(0);
+                            vib=0;
+                            voff.setBackgroundColor(Color.parseColor("#00ff00"));
+                            von.setBackgroundColor(Color.parseColor("#ff0000"));
+                        }
+                    });
+
+                    von.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            vibratefreq.setvib(50);
+                            vib=50;
+                            vibe.vibrate(50);
+                            von.setBackgroundColor(Color.parseColor("#00ff00"));
+                            voff.setBackgroundColor(Color.parseColor("#ff0000"));
+                        }
+                    });
+
+
+                    dialog.show();
+                }
+            });
+
             PlayOnline.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    vibe.vibrate(50);
+                    vibe.vibrate(vib);
 
                     e=1;
                     JSONObject info = new JSONObject();
@@ -129,11 +182,10 @@ public class MainActivity extends AppCompatActivity {
             });
 
 
-
             PlayWithFriends.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    vibe.vibrate(50);
+                    vibe.vibrate(vib);
                     Intent i = new Intent(MainActivity.this,playwithfriends.class);
                     i.putExtra("username",username);
                     startActivity(i);
@@ -144,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
             ChatRoom.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    vibe.vibrate(50);
+                    vibe.vibrate(vib);
                     Intent i = new Intent(MainActivity.this,groupchat.class);
                     i.putExtra("username",username);
                     startActivity(i);
@@ -156,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
             findfriends.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    vibe.vibrate(50);
+                    vibe.vibrate(vib);
                     Intent i =new Intent(MainActivity.this,findfriends.class);
                     startActivity(i);
                 }
@@ -453,6 +505,9 @@ public class MainActivity extends AppCompatActivity {
         o3= (CircleImageView)findViewById(R.id.o3);
         o4= (CircleImageView)findViewById(R.id.o4);
         o5= (CircleImageView)findViewById(R.id.o5);
+
+        setting =(ImageView)findViewById(R.id.settings);
+        info =(ImageView)findViewById(R.id.info);
 
     }
 }

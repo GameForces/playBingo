@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/border3"
+    android:padding="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/s1"
+        >
+        <ImageView
+            android:id="@+id/closedailogsetting"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/close"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_below="@+id/s1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/vib"
+        >
+
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="Vibration"
+            android:textSize="25dp"
+            android:id="@+id/vibration"
+            />
+        <TextView
+            android:layout_toRightOf="@+id/vibration"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="OFF"
+            android:id="@+id/voff"
+            android:textSize="25dp"
+            android:background="#ff0000"
+            />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/voff"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="ON"
+            android:id="@+id/von"
+            android:textSize="25dp"
+            android:background="#00ff00"
+            />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/sou"
+        android:layout_below="@+id/vib"
+        >
+
+
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="Sound"
+            android:textSize="25dp"
+            android:id="@+id/sound"
+            />
+        <TextView
+            android:layout_toRightOf="@+id/sound"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="OFF"
+            android:id="@+id/soff"
+            android:textSize="25dp"
+            android:background="#ff0000"
+            />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/soff"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
+            android:text="ON"
+            android:id="@+id/son"
+            android:textSize="25dp"
+            android:background="#00ff00"
+            />
+    </RelativeLayout>
+</RelativeLayout>

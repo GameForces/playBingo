@@ -39,6 +39,7 @@ public class groupchat extends AppCompatActivity {
     private EditText typedmessage;
     private String message;
     private Socket mSocket;
+    private int vib;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class groupchat extends AppCompatActivity {
         sendMsg=(ImageButton)findViewById(R.id.sendgrpmessage);
         typedmessage=(EditText)findViewById(R.id.groupMessage);
 
+        vib=vibratefreq.getvib();
 
 
         mSocket=SocketHandler.getSocket();
@@ -72,7 +74,7 @@ public class groupchat extends AppCompatActivity {
                 message = typedmessage.getText().toString();
 
                 if (!TextUtils.isEmpty(message)) {
-                    vibe.vibrate(50);
+                    vibe.vibrate(vib);
                     typedmessage.setText("");
                     JSONObject info = new JSONObject();
                     try {
