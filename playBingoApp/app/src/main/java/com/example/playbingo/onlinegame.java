@@ -78,6 +78,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     private TextView score2;
     private String p1="0";
     private String p2="0";
+    private int vib;
 
 
 
@@ -106,6 +107,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
         e=0;
         intializedfields();
+
+        vib=vibratefreq.getvib();
 
         vibe = (Vibrator) onlinegame.this.getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -158,7 +161,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             public void onClick(View v) {
 
 
-                vibe.vibrate(50);
+                vibe.vibrate(vib);
                 Animation fadeIn = new AlphaAnimation(0, 1);
                 fadeIn.setInterpolator(new DecelerateInterpolator());
                 fadeIn.setDuration(1000);
@@ -192,7 +195,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onClick(View v) {
 
-                vibe.vibrate(50);
+                vibe.vibrate(vib);
 
                 Animation fadeIn = new AlphaAnimation(0, 1);
                 fadeIn.setInterpolator(new DecelerateInterpolator());
@@ -418,7 +421,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         , Toast.LENGTH_SHORT).show();
                 */
 
-                vibe.vibrate(50);
+                vibe.vibrate(vib);
                 String msg = typedmessage.getText().toString();
 
                 typedmessage.setText("");
@@ -494,7 +497,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                             home.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    vibe.vibrate(50);
+                                    vibe.vibrate(vib);
                                     Intent i  =new Intent(onlinegame.this,MainActivity.class);
                                     startActivity(i);
                                 }
@@ -503,7 +506,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onClick(View v) {
 
-                                    vibe.vibrate(50);
+                                    vibe.vibrate(vib);
                                     JSONObject info = new JSONObject();
                                     try{
                                         info.put("username",username);
@@ -522,7 +525,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onClick(View v) {
 
-                                    vibe.vibrate(50);
+                                    vibe.vibrate(vib);
                                     JSONObject info = new JSONObject();
                                     try {
                                         info.put("username", username);
@@ -610,7 +613,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onClick(View v) {
 
-                                    vibe.vibrate(50);
+                                    vibe.vibrate(vib);
                                     Intent i  =new Intent(onlinegame.this,MainActivity.class);
                                     startActivity(i);
                                 }
@@ -620,7 +623,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onClick(View v) {
 
-                                    vibe.vibrate(50);
+                                    vibe.vibrate(vib);
                                     JSONObject info = new JSONObject();
                                     try{
                                         info.put("username",username);
@@ -639,7 +642,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 @Override
                                 public void onClick(View v) {
 
-                                    vibe.vibrate(50);
+                                    vibe.vibrate(vib);
                                     JSONObject info = new JSONObject();
                                     try {
                                         info.put("username", username);
@@ -853,7 +856,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     public void onBackPressed() {
 
         super.onBackPressed();
-        vibe.vibrate(50);
+        vibe.vibrate(vib);
         try {
             JSONObject info =new JSONObject();
             info.put("username",username);
@@ -873,7 +876,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         e=1;
 
-        vibe.vibrate(50);
+        vibe.vibrate(vib);
         if (playerturn) {
             int x = 0, y = 0;
             String vtag = v.getTag().toString();
@@ -1042,6 +1045,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         info.put("a55", visited[4][4]);
                         info.put("e", e);
                         info.put("username",username);
+                        info.put("fusername",fuser);
                     }catch (JSONException e)
                     {
                         e.printStackTrace();
@@ -1066,6 +1070,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     info.put("y", y);
                     info.put("cnt",totallinescount);
                     info.put("fusername",fuser);
+                    info.put("username",username);
 
                     if(e==1) {
                         msocket.emit("playermove", info);

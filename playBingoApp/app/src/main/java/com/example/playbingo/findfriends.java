@@ -25,6 +25,7 @@ public class findfriends extends AppCompatActivity {
     private Button senduser;
     private Socket mSocket;
     private RelativeLayout relativeLayout;
+    private TextView rating;
 
 
     @Override
@@ -52,6 +53,7 @@ public class findfriends extends AppCompatActivity {
                             fusershow.setText(info.getString("username"));
                             matchplayedshow.setText(info.getString("matchplayed"));
                             atchwinshow.setText(info.getString("matchwin"));
+                            rating.setText(info.getString("rating"));
 
                             relativeLayout.setVisibility(View.VISIBLE);
 
@@ -94,5 +96,6 @@ public class findfriends extends AppCompatActivity {
         senduser = (Button)findViewById(R.id.sendfuser);
         fusername = (EditText)findViewById(R.id.findfuser);
         relativeLayout = (RelativeLayout)findViewById(R.id.findfrienduser);
+        rating = (TextView)findViewById(R.id.matchrating);
     }
 }

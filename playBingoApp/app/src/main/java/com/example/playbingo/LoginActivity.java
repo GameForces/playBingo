@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     private String pass;
     private TextView regis;
     private boolean backpressed=false;
+    private int vib;
     {
         try {
             mSocket = IO.socket("https://obscure-reaches-99859.herokuapp.com/");
@@ -49,13 +50,14 @@ public class LoginActivity extends AppCompatActivity {
         InitializedFields();
 
 
+        vib=vibratefreq.getvib();
 
         final Vibrator vibe = (Vibrator) LoginActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
         regis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                vibe.vibrate(50);
+                vibe.vibrate(vib);
                 Intent i= new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(i);
             }
@@ -67,7 +69,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v)
             {
 
-                vibe.vibrate(50);
+                vibe.vibrate(vib);
                 name  = username.getText().toString();
                 pass = password.getText().toString();
 
