@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -78,10 +79,12 @@ public class MainActivity extends AppCompatActivity {
     private ImageView info;
     private ImageView settingclose;
     private int vib;
+    private boolean willPlay;
     private TextView soff;
     private TextView son;
     private TextView voff;
     private TextView von;
+    MediaPlayer tap;
     {
         try {
             mSocket = IO.socket("https://obscure-reaches-99859.herokuapp.com/");
@@ -97,8 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
 
             doit();
-
+            tap=MediaPlayer.create(MainActivity.this,R.raw.tapsound);
             vib=vibratefreq.getvib();
+            willPlay=soundbool.getbool();
             SocketHandler.setSocket(mSocket);
 
             final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
@@ -117,9 +121,11 @@ public class MainActivity extends AppCompatActivity {
             setting.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    vibe.vibrate(vib);
+                    tap.start();
                     final Dialog dialog = new Dialog(MainActivity.this);
                     dialog.setContentView(R.layout.settinglayout);
-                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.setCanceledOnTouchOutside(true);
 
                     settingclose = (ImageView)dialog.findViewById(R.id.closedailogsetting);
                     settingclose.setOnClickListener(new View.OnClickListener() {
@@ -131,10 +137,15 @@ public class MainActivity extends AppCompatActivity {
 
                     voff=(TextView)dialog.findViewById(R.id.voff);
                     von=(TextView)dialog.findViewById(R.id.von);
+                    soff=(TextView)dialog.findViewById(R.id.soff);
+                    son=(TextView)dialog.findViewById(R.id.son);
+
 
                     voff.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            if(willPlay)
+                                tap.start();
                             vibratefreq.setvib(0);
                             vib=0;
                             voff.setBackgroundColor(Color.parseColor("#00ff00"));
@@ -145,11 +156,36 @@ public class MainActivity extends AppCompatActivity {
                     von.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
+                            if(willPlay)
+                                tap.start();
                             vibratefreq.setvib(50);
                             vib=50;
                             vibe.vibrate(50);
                             von.setBackgroundColor(Color.parseColor("#00ff00"));
                             voff.setBackgroundColor(Color.parseColor("#ff0000"));
+                        }
+                    });
+
+                    soff.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            soundbool.setbool(false);
+                            vibe.vibrate(vib);
+                            willPlay=false;
+                            soff.setBackgroundColor(Color.parseColor("#00ff00"));
+                            son.setBackgroundColor(Color.parseColor("#ff0000"));
+                        }
+                    });
+
+                    son.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            vibe.vibrate(vib);
+                            soundbool.setbool(false);
+                            willPlay=true;
+                            tap.start();
+                            son.setBackgroundColor(Color.parseColor("#00ff00"));
+                            soff.setBackgroundColor(Color.parseColor("#ff0000"));
                         }
                     });
 
@@ -162,9 +198,12 @@ public class MainActivity extends AppCompatActivity {
             info.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    vibe.vibrate(vib);
+                    if(willPlay)
+                        tap.start();
                     final Dialog dialog = new Dialog(MainActivity.this);
                     dialog.setTitle("How to play");
-                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.setCanceledOnTouchOutside(true);
                     dialog.setContentView(R.layout.infodialog);
                     dialog.show();
                 }
@@ -174,6 +213,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     vibe.vibrate(vib);
+                    if(willPlay)
+                        tap.start();
 
                     e=1;
                     JSONObject info = new JSONObject();
@@ -198,6 +239,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     vibe.vibrate(vib);
+                    if(willPlay)
+                        tap.start();
                     Intent i = new Intent(MainActivity.this,playwithfriends.class);
                     i.putExtra("username",username);
                     startActivity(i);
@@ -209,6 +252,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     vibe.vibrate(vib);
+                    if(willPlay)
+                        tap.start();
                     Intent i = new Intent(MainActivity.this,groupchat.class);
                     i.putExtra("username",username);
                     startActivity(i);
@@ -221,6 +266,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     vibe.vibrate(vib);
+                    if(willPlay)
+                        tap.start();
                     Intent i =new Intent(MainActivity.this,findfriends.class);
                     startActivity(i);
                 }

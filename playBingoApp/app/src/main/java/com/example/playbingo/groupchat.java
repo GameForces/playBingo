@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaDataSource;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.text.TextUtils;
@@ -40,9 +42,15 @@ public class groupchat extends AppCompatActivity {
     private String message;
     private Socket mSocket;
     private int vib;
+    private boolean willplay;
+    MediaPlayer imsg;
+    MediaPlayer umsg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        imsg=MediaPlayer.create(groupchat.this,R.raw.outgoingmsg);
+        umsg=MediaPlayer.create(groupchat.this,R.raw.incomingmsg);
+        willplay=soundbool.getbool();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groupchat);
 
@@ -74,6 +82,8 @@ public class groupchat extends AppCompatActivity {
                 message = typedmessage.getText().toString();
 
                 if (!TextUtils.isEmpty(message)) {
+                    if(willplay)
+                        imsg.start();
                     vibe.vibrate(vib);
                     typedmessage.setText("");
                     JSONObject info = new JSONObject();
@@ -107,6 +117,8 @@ public class groupchat extends AppCompatActivity {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    if(willplay)
+                        umsg.start();
 
 
                     String id ;

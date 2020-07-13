@@ -16,6 +16,7 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -79,6 +80,15 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     private String p1="0";
     private String p2="0";
     private int vib;
+    MediaPlayer tap;
+    MediaPlayer ipop;
+    MediaPlayer upop;
+    MediaPlayer rowformed;
+    MediaPlayer outmsg;
+    MediaPlayer inmsg;
+    MediaPlayer ilose;
+    MediaPlayer iwin;
+    private boolean willplay;
 
 
 
@@ -111,6 +121,15 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         vib=vibratefreq.getvib();
 
         vibe = (Vibrator) onlinegame.this.getSystemService(Context.VIBRATOR_SERVICE);
+        tap=MediaPlayer.create(onlinegame.this,R.raw.tapsound);
+        ipop=MediaPlayer.create(onlinegame.this,R.raw.ipop);
+        upop=MediaPlayer.create(onlinegame.this,R.raw.youpop);
+        rowformed=MediaPlayer.create(onlinegame.this,R.raw.rowformed);
+        inmsg=MediaPlayer.create(onlinegame.this,R.raw.incomingmsg);
+        outmsg=MediaPlayer.create(onlinegame.this,R.raw.outgoingmsg);
+        iwin=MediaPlayer.create(onlinegame.this,R.raw.youwinsound);
+        ilose=MediaPlayer.create(onlinegame.this,R.raw.youlosesoundeffect);
+        willplay=soundbool.getbool();
 
         msocket=SocketHandler.getSocket();
 
@@ -162,6 +181,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
 
                 vibe.vibrate(vib);
+                if(willplay)
+                    tap.start();
                 Animation fadeIn = new AlphaAnimation(0, 1);
                 fadeIn.setInterpolator(new DecelerateInterpolator());
                 fadeIn.setDuration(1000);
@@ -196,6 +217,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             public void onClick(View v) {
 
                 vibe.vibrate(vib);
+                tap.start();
 
                 Animation fadeIn = new AlphaAnimation(0, 1);
                 fadeIn.setInterpolator(new DecelerateInterpolator());
@@ -420,11 +442,15 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 */
 
                 vibe.vibrate(vib);
+                if(willplay)
+                    outmsg.start();
                 String msg = typedmessage.getText().toString();
 
                 typedmessage.setText("");
                 JSONObject info = new JSONObject();
                 try {
+                    vibe.vibrate(vib);
+
                     info.put("message", msg);
                     msocket.emit("gamechat", info);
                 } catch (JSONException e) {
@@ -463,6 +489,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    if(willplay)
+                        ilose.start();
                     YourTurn.setText("YOU LOSE");
                     try {
                         JSONObject info = new JSONObject();
@@ -495,6 +523,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                             home.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
+                                    if(willplay)
+                                        tap.start();
                                     vibe.vibrate(vib);
                                     Intent i  =new Intent(onlinegame.this,MainActivity.class);
                                     startActivity(i);
@@ -505,6 +535,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 public void onClick(View v) {
 
                                     vibe.vibrate(vib);
+                                    if(willplay)
+                                        tap.start();
                                     JSONObject info = new JSONObject();
                                     try{
                                         info.put("username",username);
@@ -524,6 +556,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 public void onClick(View v) {
 
                                     vibe.vibrate(vib);
+                                    if(willplay)
+                                        tap.start();
                                     JSONObject info = new JSONObject();
                                     try {
                                         info.put("username", username);
@@ -575,6 +609,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     private Emitter.Listener onwin = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
+            if(willplay)
+                iwin.start();
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -612,6 +648,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 public void onClick(View v) {
 
                                     vibe.vibrate(vib);
+                                    if(willplay)
+                                        tap.start();
                                     Intent i  =new Intent(onlinegame.this,MainActivity.class);
                                     startActivity(i);
                                 }
@@ -622,6 +660,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 public void onClick(View v) {
 
                                     vibe.vibrate(vib);
+                                    if(willplay)
+                                        tap.start();
                                     JSONObject info = new JSONObject();
                                     try{
                                         info.put("username",username);
@@ -641,6 +681,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                                 public void onClick(View v) {
 
                                     vibe.vibrate(vib);
+                                    if(willplay)
+                                        tap.start();
                                     JSONObject info = new JSONObject();
                                     try {
                                         info.put("username", username);
@@ -665,6 +707,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     private Emitter.Listener onmss = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
+            inmsg.start();
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -721,6 +764,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    if(willplay)
+                        upop.start();
 
                     int x = 0, y = 0;
 
@@ -855,6 +900,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
         super.onBackPressed();
         vibe.vibrate(vib);
+        if(willplay)
+            tap.start();
         try {
             JSONObject info =new JSONObject();
             info.put("username",username);
@@ -875,6 +922,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         e=1;
 
         vibe.vibrate(vib);
+        if(willplay)
+            ipop.start();
         if (playerturn) {
             int x = 0, y = 0;
             String vtag = v.getTag().toString();
@@ -901,6 +950,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     }
                 }
                 if (cnt == 5) {
+                    rowformed.start();
                     totallinescount += 1;
                     for (int i = 0; i < 5; i++) {
                         a[x][i].setBackgroundResource(R.drawable.gamecirclelast);
@@ -917,6 +967,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 }
                 if (cnt == 5) {
                     totallinescount += 1;
+                    rowformed.start();
                     for (int i = 0; i < 5; i++) {
                         a[i][y].setBackgroundResource(R.drawable.gamecirclelast);
                         visited[i][y]=2;
@@ -932,6 +983,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         }
                     }
                     if (cnt == 5) {
+                        rowformed.start();
                         totallinescount += 1;
                         for (int i = 0; i < 5; i++) {
                             a[4-i][i].setBackgroundResource(R.drawable.gamecirclelast);
@@ -948,6 +1000,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         }
                     }
                     if (cnt == 5) {
+                        rowformed.start();
                         totallinescount ++;
                         for (int i = 0; i < 5; i++) {
                             a[i][i].setBackgroundResource(R.drawable.gamecirclelast);
@@ -1005,6 +1058,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
                 }
                 if (totallinescount > 4) {
+                    if(willplay)
+                        iwin.start();
                     playerturn = false;
                     for (int i = 1; i <= 5; i++) {
                         for (int j = 1; j <= 5; j++) {
@@ -1014,6 +1069,8 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
                     JSONObject info = new JSONObject();
                     try {
+                        if(willplay)
+                            upop.start();
                         info.put("cnt",totallinescount);
 
                         info.put("a11", visited[0][0]);
@@ -1049,6 +1106,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         e.printStackTrace();
                     }
                     if(e==1) {
+                        ilose.start();
                         msocket.emit("playerwin", info);
                     }
 
@@ -1063,6 +1121,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                 playerturn = false;
                 JSONObject info = new JSONObject();
                 try {
+                    upop.start();
                     info.put("number", a[x][y].getText().toString());
                     info.put("x", x);
                     info.put("y", y);

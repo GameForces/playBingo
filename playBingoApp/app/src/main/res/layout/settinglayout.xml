@@ -21,42 +21,43 @@
             />
 
     </RelativeLayout>
+
+
     <RelativeLayout
-        android:layout_below="@+id/s1"
+        android:id="@+id/vib"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/vib"
-        >
+        android:layout_below="@+id/s1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp">
 
 
         <TextView
+            android:id="@+id/vibration"
             android:layout_width="150dp"
             android:layout_height="30dp"
             android:text="Vibration"
-            android:textSize="25dp"
-            android:id="@+id/vibration"
-            />
+            android:textSize="25dp" />
+
         <TextView
-            android:layout_toRightOf="@+id/vibration"
+            android:id="@+id/voff"
             android:layout_width="50dp"
             android:layout_height="30dp"
-            android:text="OFF"
-            android:id="@+id/voff"
-            android:textSize="25dp"
+            android:layout_toRightOf="@+id/vibration"
             android:background="#ff0000"
-            />
+            android:text="OFF"
+            android:textSize="25dp" />
+
         <TextView
+            android:id="@+id/von"
+            android:layout_width="50dp"
+            android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/voff"
-            android:layout_width="50dp"
-            android:layout_height="30dp"
-            android:text="ON"
-            android:id="@+id/von"
-            android:textSize="25dp"
             android:background="#00ff00"
-            />
+            android:text="ON"
+            android:textSize="25dp" />
     </RelativeLayout>
-
 
     <RelativeLayout
         android:layout_width="match_parent"

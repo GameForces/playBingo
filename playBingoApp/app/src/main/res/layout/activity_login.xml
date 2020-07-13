@@ -4,75 +4,130 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/login_logo"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/logo2">
 
-    </ImageView>
     <EditText
-        android:layout_below="@id/login_logo"
         android:id="@+id/login_username"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginLeft="100dp"
-        android:background="@drawable/border"
-        android:textStyle="italic"
-        android:textColor="#ffffff"
-        android:hint="old nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="162dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="295dp"
+        android:layout_marginEnd="65dp"
+        android:layout_marginRight="70dp"
+        android:hint=""
         android:textAlignment="center"
-        android:textColorHint="#ffffff"
-        android:padding="5dp"
-        android:textSize="30dp"
-        >
-    </EditText>
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textSize="25dp"
+        android:textStyle="italic"></EditText>
+
     <EditText
         android:id="@+id/login_pass"
-        android:layout_width="200dp"
-        android:layout_height="70dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/login_username"
-        android:layout_marginLeft="100dp"
-        android:background="@drawable/border"
-        android:textStyle="italic"
-        android:textColor="#ffffff"
-        android:textColorHint="#ffffff"
-        android:padding="5dp"
-        android:hint="old password"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="175dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="70dp"
+        android:hint=""
         android:textAlignment="center"
-        >
-    </EditText>
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textStyle="italic"></EditText>
+
     <Button
         android:id="@+id/login_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login_pass"
-        android:layout_marginTop="60dp"
         android:layout_centerInParent="true"
-        android:text="Move to bingo"
-        android:textAlignment="center"
-        android:textSize="25dp"
+        android:layout_marginTop="54dp"
+        android:background="@drawable/bor2_white"
+        android:gravity="center"
         android:padding="10dp"
-        android:background="@drawable/border2"
-        >
-    </Button>
-    <TextView
-        android:id="@+id/new_one"
+        android:text="Login"
+        android:textAlignment="center"
+        android:textSize="25dp"></Button>
+
+    <CheckBox
+        android:id="@+id/showpsw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="240dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginBottom="256dp"
+        android:text="Show Password"></CheckBox>
+
+    <TextView
+        android:id="@+id/new_one"
+        android:layout_width="366dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/login_submit"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="27dp"
         android:layout_marginLeft="100dp"
-        android:text="Create new nickname"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="18dp"
+        android:text="Create new account"
         android:textColor="#ff0000"
-        android:textSize="25dp"
-        android:layout_marginTop="20dp"
-        >
+        android:gravity="center"
+        android:textSize="25dp">
 
     </TextView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="119dp"
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="315dp"
+        android:text="username"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="109dp"
+        android:layout_height="32dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="46dp"
+        android:layout_marginBottom="303dp"
+        android:text="password"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/playBingo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="63dp"
+        android:gravity="center"
+        android:text="playBINGO"
+        android:textColor="#FF0000"
+        android:textSize="50dp"
+        android:textStyle="bold" />
 </RelativeLayout>
