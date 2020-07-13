@@ -237,43 +237,42 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void run() {
 
-                        p2 = args[0].toString();
-                        if(p2.equals("0"))
+                        if(args[0].toString().equals("0"))
                         {
 
                             score2.setText("0");
                         }
-                        else if(p2.equals("1"))
+                        else if(args[0].toString().equals("1"))
                         {
 
                             score2.setText("1");
                         }
-                        else if(p2.equals("2"))
+                        else if(args[0].toString().equals("2"))
                         {
 
                             score2.setText("2");
                         }
-                        else if(p2.equals("3"))
+                        else if(args[0].toString().equals("3"))
                         {
 
                             score2.setText("3");
                         }
-                        else if(p2.equals("4"))
+                        else if(args[0].toString().equals("4"))
                         {
 
                             score2.setText("4");
                         }
-                        else if(p2.equals("5"))
+                        else if(args[0].toString().equals("5"))
                         {
 
                             score2.setText("5");
                         }
-                        else if(p2.equals("6"))
+                        else if(args[0].toString().equals("6"))
                         {
                             score2.setText("6");
 
                         }
-                        else if(p2.equals("7"))
+                        else if(args[0].toString().equals("7"))
                         {
                             score2.setText("7");
 
@@ -300,43 +299,42 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void run() {
 
-                        p2 = args[0].toString();
-                        if(p2.equals("0"))
+                        if(args[0].toString().equals("0"))
                         {
 
                             score1.setText("0");
                         }
-                        else if(p2.equals("1"))
+                        else if(args[0].toString().equals("1"))
                         {
 
                             score1.setText("1");
                         }
-                        else if(p2.equals("2"))
+                        else if(args[0].toString().equals("2"))
                         {
 
                             score1.setText("2");
                         }
-                        else if(p2.equals("3"))
+                        else if(args[0].toString().equals("3"))
                         {
 
                             score1.setText("3");
                         }
-                        else if(p2.equals("4"))
+                        else if(args[0].toString().equals("4"))
                         {
 
                             score1.setText("4");
                         }
-                        else if(p2.equals("5"))
+                        else if(args[0].toString().equals("5"))
                         {
 
                             score1.setText("5");
                         }
-                        else if(p2.equals("6"))
+                        else if(args[0].toString().equals("6"))
                         {
                             score1.setText("6");
 
                         }
-                        else if(p2.equals("7"))
+                        else if(args[0].toString().equals("7"))
                         {
                             score1.setText("7");
 
