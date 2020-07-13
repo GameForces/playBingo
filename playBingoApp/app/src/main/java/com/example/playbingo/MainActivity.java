@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             final Vibrator vibe = (Vibrator) MainActivity.this.getSystemService(Context.VIBRATOR_SERVICE);
 
             mSocket.connect();
-            UserDatabase db = new UserDatabase(MainActivity.this);
+            final UserDatabase db = new UserDatabase(MainActivity.this);
             username = db.getcurrentuser();
 
             if(TextUtils.isEmpty(username))
@@ -154,6 +154,18 @@ public class MainActivity extends AppCompatActivity {
                     });
 
 
+                    dialog.show();
+                }
+            });
+
+
+            info.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Dialog dialog = new Dialog(MainActivity.this);
+                    dialog.setTitle("How to play");
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.setContentView(R.layout.infodialog);
                     dialog.show();
                 }
             });
