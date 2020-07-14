@@ -148,7 +148,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         totallinescount = 0;
         playerturn = false;
         mturn = true;
-        int n = 25;
+        final int n = 25;
         ArrayList<Integer> v = new ArrayList<>(n);
         generateRandom(25, v);
 
@@ -258,43 +258,49 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
                     @Override
                     public void run() {
-
-                        if(args[0].toString().equals("0"))
+                        try {
+                            String data = args[0].toString();
+                            JSONObject info = new JSONObject(data);
+                            p1=info.getString("ocnt");
+                        }catch (JSONException e)
                         {
-
+                            e.printStackTrace();
+                        }
+                        if(p1.equals("0"))
+                        {
                             score2.setText("0");
                         }
-                        else if(args[0].toString().equals("1"))
+                        else if(p1.equals("1"))
                         {
 
                             score2.setText("1");
                         }
-                        else if(args[0].toString().equals("2"))
+                        else if(p1.equals("2"))
                         {
 
                             score2.setText("2");
                         }
-                        else if(args[0].toString().equals("3"))
+                        else if(p1.equals("3"))
                         {
 
                             score2.setText("3");
                         }
-                        else if(args[0].toString().equals("4"))
+                        else if(p1.equals("4"))
                         {
 
                             score2.setText("4");
                         }
-                        else if(args[0].toString().equals("5"))
+                        else if(p1.equals("5"))
                         {
 
                             score2.setText("5");
                         }
-                        else if(args[0].toString().equals("6"))
+                        else if(p1.equals("6"))
                         {
                             score2.setText("6");
 
                         }
-                        else if(args[0].toString().equals("7"))
+                        else if(p1.equals("7"))
                         {
                             score2.setText("7");
 
@@ -321,42 +327,51 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                     @Override
                     public void run() {
 
-                        if(args[0].toString().equals("0"))
+                        try {
+                            String data = args[0].toString();
+                            JSONObject info = new JSONObject(data);
+                            p1=info.getString("cnt");
+                        }catch (JSONException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                        if(p1.equals("0"))
                         {
 
                             score1.setText("0");
                         }
-                        else if(args[0].toString().equals("1"))
+                        else if(p1.equals("1"))
                         {
 
                             score1.setText("1");
                         }
-                        else if(args[0].toString().equals("2"))
+                        else if(p1.equals("2"))
                         {
 
                             score1.setText("2");
                         }
-                        else if(args[0].toString().equals("3"))
+                        else if(p1.equals("3"))
                         {
 
                             score1.setText("3");
                         }
-                        else if(args[0].toString().equals("4"))
+                        else if(p1.equals("4"))
                         {
 
                             score1.setText("4");
                         }
-                        else if(args[0].toString().equals("5"))
+                        else if(p1.equals("5"))
                         {
 
                             score1.setText("5");
                         }
-                        else if(args[0].toString().equals("6"))
+                        else if(p1.equals("6"))
                         {
                             score1.setText("6");
 
                         }
-                        else if(args[0].toString().equals("7"))
+                        else if(p1.equals("7"))
                         {
                             score1.setText("7");
 
@@ -515,6 +530,9 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                             if(!((Activity) onlinegame.this).isFinishing()) {
                                 dialog.show();
                             }
+                            if(((Activity) onlinegame.this).isFinishing()) {
+                                dialog.dismiss();
+                            }
                             replay = (TextView)dialog.findViewById(R.id.game_replay);
                             playonline = (TextView)dialog.findViewById(R.id.game_play_online);
                             home = (TextView)dialog.findViewById(R.id.game_go_home);
@@ -636,6 +654,9 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
 
                             if(!((Activity) onlinegame.this).isFinishing()) {
                                 dialog.show();
+                            }
+                            if(((Activity) onlinegame.this).isFinishing()) {
+                                dialog.dismiss();
                             }
 
                             replay = (TextView)dialog.findViewById(R.id.game_replay);
