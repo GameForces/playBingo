@@ -268,7 +268,7 @@
         android:padding="9dp"
         android:background="@drawable/mainlayoutback"
         android:layout_marginTop="350dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="25dp"
         android:id="@+id/playonlineview"
         android:layout_width="130dp"
         android:layout_height="100dp">
@@ -340,7 +340,7 @@
 
         android:background="@drawable/mainlayoutback"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="25dp"
         android:layout_below="@id/playonlineview"
         android:id="@+id/chatroomview"
         android:layout_width="130dp"
@@ -406,21 +406,24 @@
     </RelativeLayout>
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:id="@+id/settings"
-        android:src="@drawable/settings"
-        />
-    <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="26dp"
+        android:src="@drawable/settings" />
+
+    <ImageView
         android:id="@+id/info"
-        android:src="@drawable/info"
-        />
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="26dp"
+        android:src="@drawable/info" />
 
 </RelativeLayout>
 </androidx.drawerlayout.widget.DrawerLayout>

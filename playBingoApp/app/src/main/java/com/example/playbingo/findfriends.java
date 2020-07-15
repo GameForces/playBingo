@@ -28,6 +28,7 @@ public class findfriends extends AppCompatActivity {
     private TextView rating;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
