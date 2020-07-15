@@ -17,17 +17,19 @@ public class UserDatabase extends SQLiteOpenHelper {
     private static final String PASSWORD = "pass";
 
 
+
     UserDatabase(Context context)
     {
         super(context,DATABASE_NAME,null,DATABASE_VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
         //create table;
         String query = "CREATE TABLE "+DATABASE_TABLE+"("+KEY_ID+"INT PRIMARY KEY,"+
                 USER_NAME+" TEXT, "+
-                PASSWORD+" TEXT "+")";
+                PASSWORD+" TEXT "+ ")";
         db.execSQL(query);
 
     }

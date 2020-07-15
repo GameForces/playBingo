@@ -89,6 +89,7 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
     MediaPlayer ilose;
     MediaPlayer iwin;
     private boolean willplay;
+    private int w=1;
 
 
 
@@ -163,13 +164,29 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
             YourTurn.setText("Your Turn");
         }
 
-        int k = 0;
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                a[i][j].setText(v.get(k).toString());
-                k++;
+        if(w==1) {
+            int k = 0;
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    a[i][j].setText(v.get(k).toString());
+                    k++;
+                }
             }
+
+            Toast.makeText(onlinegame.this,w+"",Toast.LENGTH_LONG).show();
+            w=0;
         }
+
+        gamedatabase db = new gamedatabase(onlinegame.this);
+            String[][] aa = new String[5][5];
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    aa[i][j] = (String) a[i][j].getText();
+                }
+            }
+
+            db.savegame(aa, visited, score1.getText().toString(), score2.getText().toString());
+
 
 
 
@@ -596,6 +613,33 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
         }
     };
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        gamedatabase db = new gamedatabase(onlinegame.this);
+        String [][] aa = new String[5][5];
+        for(int i=0;i<5;i++)
+        {
+            for(int j=0;j<5;j++) {
+                aa[i][j] = (String) a[i][j].getText();
+            }
+        }
+
+        Toast.makeText(onlinegame.this,a[0][0].getText().toString()+" "+a[0][1].getText().toString()
+                +" "+a[0][2].getText().toString()+" "
+                +a[0][3].getText().toString()+" "+a[0][4].getText().toString()+" ",Toast.LENGTH_LONG).show();
+
+        db.savegame(aa,visited,score1.getText().toString(),score2.getText().toString());
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
     private Emitter.Listener onfriendPairing = new Emitter.Listener() {
         @Override
         public void call(final Object... args) {
@@ -649,6 +693,10 @@ public class onlinegame extends AppCompatActivity implements View.OnClickListene
                         @Override
                         public void run() {
                             final Dialog dialog = new Dialog(onlinegame.this);
+
+                            if(!((Activity) onlinegame.this).isFinishing()) {
+                                dialog.show();
+                            }
                             dialog.setContentView(R.layout.endgamedailog);
                             dialog.setCanceledOnTouchOutside(false);
 

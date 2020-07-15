@@ -12,24 +12,35 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".soundbool"></activity>
-        <activity android:name=".findfriends" />
-        <activity android:name=".dailogloading" />
-        <activity android:name=".groupchat" />
+        <activity android:name=".soundbool"
+            android:screenOrientation="sensorPortrait" />
+        <activity android:name=".findfriends"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".dailogloading"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".groupchat"
+            android:screenOrientation="sensorPortrait"/>
         <activity
             android:name=".onlinegame"
-            android:launchMode="singleInstance" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".playwithfriends" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".SplashScreenActivity">
+            android:launchMode="singleInstance"
+            android:screenOrientation="sensorPortrait"
+            />
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".playwithfriends"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".SplashScreenActivity"
+            android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="sensorPortrait"/>
     </application>
 
 </manifest>

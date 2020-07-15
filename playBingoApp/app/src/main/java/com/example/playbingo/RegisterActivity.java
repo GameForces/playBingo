@@ -66,6 +66,9 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+
+
+
         mSocket.on("userSuccess",onSuccess);
         mSocket.on("failed",onDuplicate);
 
@@ -130,6 +133,13 @@ public class RegisterActivity extends AppCompatActivity {
 
             UserDatabase db = new UserDatabase(RegisterActivity.this);
             db.addUser(name,pass);
+
+
+            gamedatabase ddb = new gamedatabase(RegisterActivity.this);
+            ddb.add();
+
+            settingdatabase dbb = new settingdatabase(RegisterActivity.this);
+            dbb.add();
 
             Intent i = new Intent(RegisterActivity.this,MainActivity.class);
             startActivity(i);

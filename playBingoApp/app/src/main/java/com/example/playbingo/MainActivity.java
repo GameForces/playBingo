@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView son;
     private TextView voff;
     private TextView von;
+    private String vibrate;
+    private String sound;
     MediaPlayer tap;
     {
         try {
@@ -116,9 +118,29 @@ public class MainActivity extends AppCompatActivity {
                 Intent i = new Intent(MainActivity.this,RegisterActivity.class);
                 startActivity(i);
             }
+            final settingdatabase dbb = new settingdatabase(MainActivity.this);
 
-
-            setting.setOnClickListener(new View.OnClickListener() {
+            if(dbb.getsound().equals("on"))
+            {
+                soundbool.setbool(true);
+                willPlay=true;
+            }
+            else
+            {
+                soundbool.setbool(false);
+                willPlay=false;
+            }
+            if (dbb.getVibrate().equals("on"))
+            {
+                vibratefreq.setvib(50);
+                vib =50;
+            }
+            else
+            {
+                vibratefreq.setvib(0);
+                vib=0;
+            }
+        setting.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     vibe.vibrate(vib);
@@ -132,15 +154,42 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             dialog.cancel();
+
                         }
                     });
 
+
+                    final settingdatabase dbb = new settingdatabase(MainActivity.this);
                     voff=(TextView)dialog.findViewById(R.id.voff);
                     von=(TextView)dialog.findViewById(R.id.von);
                     soff=(TextView)dialog.findViewById(R.id.soff);
                     son=(TextView)dialog.findViewById(R.id.son);
 
 
+                    if(willPlay)
+                    {
+                        soff.setBackgroundColor(Color.parseColor("#ff0000"));
+                        son.setBackgroundColor(Color.parseColor("#00ff00"));
+
+                    }
+                    else
+                    {
+                        soff.setBackgroundColor(Color.parseColor("#00ff00"));
+                        son.setBackgroundColor(Color.parseColor("#ff0000"));
+
+                    }
+                    if(vib==0)
+                    {
+                        voff.setBackgroundColor(Color.parseColor("#00ff00"));
+                        von.setBackgroundColor(Color.parseColor("#ff0000"));
+                    }
+                    else
+                    {
+
+                        von.setBackgroundColor(Color.parseColor("#00ff00"));
+                        voff.setBackgroundColor(Color.parseColor("#ff0000"));
+
+                    }
                     voff.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -150,6 +199,8 @@ public class MainActivity extends AppCompatActivity {
                             vib=0;
                             voff.setBackgroundColor(Color.parseColor("#00ff00"));
                             von.setBackgroundColor(Color.parseColor("#ff0000"));
+                            vibrate = "off";
+                            dbb.savesetting(sound,vibrate);
                         }
                     });
 
@@ -163,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
                             vibe.vibrate(50);
                             von.setBackgroundColor(Color.parseColor("#00ff00"));
                             voff.setBackgroundColor(Color.parseColor("#ff0000"));
+                            vibrate="on";
+                            dbb.savesetting(sound,vibrate);
                         }
                     });
 
@@ -174,6 +227,8 @@ public class MainActivity extends AppCompatActivity {
                             willPlay=false;
                             soff.setBackgroundColor(Color.parseColor("#00ff00"));
                             son.setBackgroundColor(Color.parseColor("#ff0000"));
+                            sound="off";
+                            dbb.savesetting(sound,vibrate);
                         }
                     });
 
@@ -186,11 +241,12 @@ public class MainActivity extends AppCompatActivity {
                             tap.start();
                             son.setBackgroundColor(Color.parseColor("#00ff00"));
                             soff.setBackgroundColor(Color.parseColor("#ff0000"));
+                            sound="on";
+                            dbb.savesetting(sound,vibrate);
                         }
                     });
-
-
                     dialog.show();
+                    dbb.savesetting(sound,vibrate);
                 }
             });
 
