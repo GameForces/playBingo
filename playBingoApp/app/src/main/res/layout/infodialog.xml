@@ -1,16 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    >
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:scrollbarSize="10dp"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        >
+        android:scrollbarAlwaysDrawVerticalTrack="true">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/howtoplay"
+        android:text="How To Play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textSize="50dp"
+        android:textColor="#FF0000"
+        android:fontFamily="sans-serif-black"/>
 
+    <TextView
+        android:id="@+id/intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/howtoplay"
+        android:text="playBingo is fun and addictive two player that can be played over internet. All you must have is stable internet and a competitor to play."
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="50dp"/>
 
+    <TextView
+        android:id="@+id/rules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Rules:"
+        android:layout_below="@id/intro"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/one"
+        android:layout_below="@id/rules"
+        android:text="You have to pop a number in your turn. Your score is equal to number of rows, columns and diagnols you have poped completely. First player to get a score equal or greter than 5 wins. "
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/one"
+        android:id="@+id/playonline"
+        android:text="Play Online"
+        android:layout_marginLeft="20dp"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pone"
+        android:layout_below="@id/playonline"
+        android:paddingHorizontal="20dp"
+        android:text="In this mode, your opponent will be unknown"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pwf"
+        android:layout_below="@id/pone"
+        android:text="Play with Friends"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:textColor="#000000"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pwfo"
+        android:layout_below="@id/pwf"
+        android:text="If you wants to play with your friend, then you can connect with him directly in Play with Friends"
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/chatroom"
+        android:layout_below="@id/pwfo"
+        android:text="Chat Room"
+        android:textSize="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textColor="#000000"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chatroom"
+        android:id="@+id/cro"
+        android:text="All users can live chat here. If you want to play with a specific user or you want to check if there is anyone else online, you can ask it here. All chats will be public and temporarily stored, you will be able to see messages as long as you open the Chat Room."
+        android:paddingHorizontal="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/act"
+        android:layout_below="@id/cro"
+        android:text="Check Activity"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"/>
+
+        </RelativeLayout>
     </ScrollView>
+
+
+
 </RelativeLayout>
