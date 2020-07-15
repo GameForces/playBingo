@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
         InitializedFields();
 
 
@@ -66,55 +68,57 @@ public class LoginActivity extends AppCompatActivity {
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
 
                 vibe.vibrate(vib);
-                name  = username.getText().toString();
-                pass = password.getText().toString();
-
-
-                mSocket.on("loginsuccess",onLoginsuccss);
-                mSocket.on("failed",onfailed);
-
-                if(TextUtils.isEmpty(name))
-                {
-                    String message = "Enter NickName";
-
-                    LayoutInflater inflater = getLayoutInflater();
-                    View layout = inflater.inflate(R.layout.custum_toast, null);
-                    TextView text = (TextView) layout.findViewById(R.id.meage);
-
-                    text.setText(message);
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    toast.setView(layout);
-                    toast.show();
-                }
-                else if(TextUtils.isEmpty(pass))
-                {
-
-                    String message = "Enter Password";
-
-                    LayoutInflater inflater = getLayoutInflater();
-                    View layout = inflater.inflate(R.layout.custum_toast, null);
-                    TextView text = (TextView) layout.findViewById(R.id.meage);
-
-                    text.setText(message);
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    toast.setView(layout);
-                    toast.show();
+                if (username.length() == 0) {
+                    username.setError("Enter username: ");
+                } else if (password.length() == 0) {
+                    password.setError("Enter Password: ");
                 }
                 else {
-                    JSONObject info = new JSONObject();
-                    try {
-                        mSocket.connect();
-                        info.put("username", name);
-                        info.put("password", pass);
-                        mSocket.emit("logininfo", info);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    name = username.getText().toString();
+                    pass = password.getText().toString();
+
+
+                    mSocket.on("loginsuccess", onLoginsuccss);
+                    mSocket.on("failed", onfailed);
+
+                    if (TextUtils.isEmpty(name)) {
+                        String message = "Enter NickName";
+
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.custum_toast, null);
+                        TextView text = (TextView) layout.findViewById(R.id.meage);
+
+                        text.setText(message);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
+                    } else if (TextUtils.isEmpty(pass)) {
+
+                        String message = "Enter Password";
+
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.custum_toast, null);
+                        TextView text = (TextView) layout.findViewById(R.id.meage);
+
+                        text.setText(message);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
+                    } else {
+                        JSONObject info = new JSONObject();
+                        try {
+                            mSocket.connect();
+                            info.put("username", name);
+                            info.put("password", pass);
+                            mSocket.emit("logininfo", info);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

@@ -76,50 +76,53 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                name  = username.getText().toString();
-                pass = password.getText().toString();
-
-                if(TextUtils.isEmpty(name))
-                {
-                    String message = "Enter NickName";
-
-                    LayoutInflater inflater = getLayoutInflater();
-                    View layout = inflater.inflate(R.layout.custum_toast, null);
-                    TextView text = (TextView) layout.findViewById(R.id.meage);
-
-                    text.setText(message);
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    toast.setView(layout);
-                    toast.show();
-                }
-                else if(TextUtils.isEmpty(pass))
-                {
-
-                    String message = "Enter Password";
-
-                    LayoutInflater inflater = getLayoutInflater();
-                    View layout = inflater.inflate(R.layout.custum_toast, null);
-                    TextView text = (TextView) layout.findViewById(R.id.meage);
-
-                    text.setText(message);
-                    Toast toast = new Toast(getApplicationContext());
-                    toast.setDuration(Toast.LENGTH_SHORT);
-                    toast.setView(layout);
-                    toast.show();
+                if (username.length() == 0) {
+                    username.setError("Enter username: ");
+                } else if (password.length() == 0) {
+                    password.setError("Enter Password: ");
                 }
                 else {
-                    JSONObject info = new JSONObject();
-                    try {
-                        mSocket.connect();
-                        info.put("username", name);
-                        info.put("password", pass);
-                        mSocket.emit("regisinfo", info);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
+                    name = username.getText().toString();
+                    pass = password.getText().toString();
 
+                    if (TextUtils.isEmpty(name)) {
+                        String message = "Enter NickName";
+
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.custum_toast, null);
+                        TextView text = (TextView) layout.findViewById(R.id.meage);
+
+                        text.setText(message);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
+                    } else if (TextUtils.isEmpty(pass)) {
+
+                        String message = "Enter Password";
+
+                        LayoutInflater inflater = getLayoutInflater();
+                        View layout = inflater.inflate(R.layout.custum_toast, null);
+                        TextView text = (TextView) layout.findViewById(R.id.meage);
+
+                        text.setText(message);
+                        Toast toast = new Toast(getApplicationContext());
+                        toast.setDuration(Toast.LENGTH_SHORT);
+                        toast.setView(layout);
+                        toast.show();
+                    } else {
+                        JSONObject info = new JSONObject();
+                        try {
+                            mSocket.connect();
+                            info.put("username", name);
+                            info.put("password", pass);
+                            mSocket.emit("regisinfo", info);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
             }
         });
 
