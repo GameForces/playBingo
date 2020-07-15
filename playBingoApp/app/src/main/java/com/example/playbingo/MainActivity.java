@@ -144,7 +144,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     vibe.vibrate(vib);
-                    tap.start();
+                    if(willPlay)
+                        tap.start();
                     final Dialog dialog = new Dialog(MainActivity.this);
                     dialog.setContentView(R.layout.settinglayout);
                     dialog.setCanceledOnTouchOutside(true);
@@ -236,9 +237,10 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onClick(View v) {
                             vibe.vibrate(vib);
-                            soundbool.setbool(false);
+                            soundbool.setbool(true);
                             willPlay=true;
-                            tap.start();
+                            if(willPlay)
+                                tap.start();
                             son.setBackgroundColor(Color.parseColor("#00ff00"));
                             soff.setBackgroundColor(Color.parseColor("#ff0000"));
                             sound="on";
@@ -609,6 +611,7 @@ public class MainActivity extends AppCompatActivity {
         n4= (CircleImageView)findViewById(R.id.n4);
         n5= (CircleImageView)findViewById(R.id.n5);
 
+
         g1= (CircleImageView)findViewById(R.id.g1);
         g2= (CircleImageView)findViewById(R.id.g2);
         g3= (CircleImageView)findViewById(R.id.g3);
@@ -620,6 +623,7 @@ public class MainActivity extends AppCompatActivity {
         o3= (CircleImageView)findViewById(R.id.o3);
         o4= (CircleImageView)findViewById(R.id.o4);
         o5= (CircleImageView)findViewById(R.id.o5);
+
 
         setting =(ImageView)findViewById(R.id.settings);
         info =(ImageView)findViewById(R.id.info);
