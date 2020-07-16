@@ -77,13 +77,18 @@ public class findfriends extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String fname = fusername.getText().toString();
-                try {
-                    JSONObject info =new JSONObject();
-                    info.put("username",fname);
-                    mSocket.emit("profileReq",info);
-                }catch (JSONException e)
+                if(fusername.length()==0){
+                    fusername.setError("Enter username: ");
+                }
+                else
                 {
-                    e.printStackTrace();
+                    try {
+                        JSONObject info = new JSONObject();
+                        info.put("username", fname);
+                        mSocket.emit("profileReq", info);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });

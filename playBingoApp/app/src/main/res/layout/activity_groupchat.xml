@@ -5,26 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".groupchat"
-    android:background="#000000"
+    android:background="#FFFFFF"
     >
 
     <LinearLayout
         android:id="@+id/groupchattop"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#000000"
+        android:background="#FFFFFF"
         >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Global Chat"
+            android:text="Chat Room"
             android:textStyle="bold"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:textSize="50dp"
             android:textAlignment="center"
             android:textAllCaps="true"
-            android:fontFamily="cursive"
             >
 
         </TextView>
@@ -46,15 +45,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#000000"
+        android:background="#FFFFFF"
         >
         <EditText
             android:id="@+id/groupMessage"
             android:background="@drawable/border"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="15dp"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:scrollbarSize="5dp"
-            android:textColor="#ffffff"
+            android:textColor="#000000"
             android:screenReaderFocusable="true"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:paddingLeft="10dp"
@@ -65,7 +66,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:src="@drawable/sendmessage"
-            android:layout_marginRight="1dp"
+            android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
             />
     </RelativeLayout>

@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/border2"
     >
 
     <TextView
@@ -11,10 +10,10 @@
         android:text="Game Over"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textAlignment="center"
         android:paddingTop="40dp"
-        android:background="@drawable/border2"
+        android:background="#0500FF"
         />
     <RelativeLayout
         android:layout_width="match_parent"
@@ -23,12 +22,11 @@
 
 
         <TextView
-            android:background="@drawable/border2"
+            android:background="#FF0000"
             android:padding="10dp"
             android:layout_toLeftOf="@+id/game_play_online"
-            android:layout_marginRight="10dp"
             android:id="@+id/game_go_home"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="25dp"
             android:textStyle="bold"
@@ -36,7 +34,7 @@
             android:text="Home"
             />
         <TextView
-            android:background="@drawable/border2"
+            android:background="#FFA200"
             android:padding="10dp"
             android:id="@+id/game_play_online"
             android:layout_centerHorizontal="true"
@@ -49,12 +47,11 @@
 
             />
         <TextView
-            android:background="@drawable/border2"
+            android:background="#15FF00"
             android:padding="10dp"
-            android:layout_marginLeft="5dp"
             android:layout_toRightOf="@+id/game_play_online"
             android:id="@+id/game_replay"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
         android:textSize="25dp"
         android:textStyle="bold"
