@@ -58,6 +58,12 @@ public class UserDatabase extends SQLiteOpenHelper {
         return ID;
     }
 
+    public void delUser()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(DATABASE_TABLE, null, null);
+
+    }
     public String getcurrentuser()
     {
         SQLiteDatabase db = this.getReadableDatabase();
