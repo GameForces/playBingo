@@ -1,5 +1,6 @@
 package com.example.playbingo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -8,29 +9,23 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.app.Activity;
-import android.app.Application;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.github.nkzawa.emitter.Emitter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,7 +41,7 @@ import java.net.URISyntaxException;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private String username;
     private RelativeLayout PlayOnline;
@@ -107,28 +102,12 @@ public class MainActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.bringToFront();
+        navigationView.setNavigationItemSelectedListener(this);
+
+
             Initializefields();
             mSocket.connect();
 
@@ -665,16 +644,79 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        super.onCreateOptionsMenu(menu);
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.drawer, menu);
+        getMenuInflater().inflate(R.menu.activity_drawer_drawer, menu);
         return true;
     }
 
+
+
+
     @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
+
+
+        return true;
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        item.setChecked(true);
+
+        if(item.getItemId()==R.id.nav_share)
+        {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "hii friend! \n i am very exciting to invite you to play this newly play bingo game with me." +
+                    "\n"+username+" is my username" );
+            sendIntent.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            startActivity(shareIntent);
+
+        }
+        if(item.getItemId()==R.id.nav_insta)
+        {
+            Uri uri = Uri.parse("https://instagram.com/gouravgoel2701?igshid=p37k0fvlc2ij");
+            Intent i =new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(i);
+        }
+        if(item.getItemId()==R.id.nav_fb)
+        {
+            Uri uri = Uri.parse("https://facebook.com/");
+            Intent i =new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(i);
+        }
+        if(item.getItemId()==R.id.nav_email)
+        {
+            Uri uri = Uri.parse("https://email.com/");
+            Intent i =new Intent(Intent.ACTION_VIEW,uri);
+            startActivity(i);
+        }
+
+        if(item.getItemId()==R.id.nav_profile)
+        {
+            Intent i =new Intent(MainActivity.this,myprofile.class);
+            startActivity(i);
+        }
+        if(item.getItemId()==R.id.nav_rating)
+        {
+            Intent i =new Intent(MainActivity.this,rating.class);
+            startActivity(i);
+        }
+        if(item.getItemId()==R.id.nav_logout)
+        {
+            UserDatabase db = new UserDatabase(MainActivity.this);
+            db.delUser();
+            Intent i = new Intent(MainActivity.this,RegisterActivity.class);
+            startActivity(i);
+        }
+        return true;
     }
 }
