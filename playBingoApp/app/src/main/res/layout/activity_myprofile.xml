@@ -1,9 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".myprofile">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <RelativeLayout
+        android:id="@+id/user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_centerInParent="true"
+        >
+        <RelativeLayout
+            android:background="@drawable/tableborder"
+            android:id="@+id/layoutname"
+            android:layout_width="300dp"
+            android:layout_height="70dp"
+
+            >
+            <TextView
+                android:id="@+id/st1"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tableborder"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:text="UserName"
+                android:textColor="#000000"
+                />
+
+            <TextView
+                android:layout_toRightOf="@+id/st1"
+                android:id="@+id/myprousershow"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tableborder"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:background="@drawable/tableborder"
+            android:layout_below="@+id/layoutname"
+            android:id="@+id/layoutmatchplayed"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            >
+
+            <TextView
+                android:id="@+id/st2"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tableborder"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:text="Match played"
+                android:textColor="#000000"
+                />
+
+            <TextView
+                android:layout_toRightOf="@+id/st2"
+                android:id="@+id/mymatchplayedshow"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tableborder"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:background="@drawable/tableborder"
+            android:layout_below="@id/layoutmatchplayed"
+            android:id="@+id/layoutrating"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            >
+
+
+            <TextView
+                android:id="@+id/st4"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tableborder"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:text="Rating"
+                android:textColor="#000000"
+                />
+
+            <TextView
+                android:layout_toRightOf="@+id/st4"
+                android:id="@+id/mymatchrating"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tableborder"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:background="@drawable/tableborder"
+            android:layout_below="@id/layoutrating"
+            android:id="@+id/layoutmatchwins"
+            android:layout_width="300dp"
+            android:layout_height="100dp"
+            >
+
+
+            <TextView
+                android:id="@+id/st3"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tableborder"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:text="Match Wins"
+                android:textColor="#000000"
+                />
+
+            <TextView
+                android:layout_toRightOf="@+id/st3"
+                android:id="@+id/mymatchwinsshow"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tableborder"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</RelativeLayout>

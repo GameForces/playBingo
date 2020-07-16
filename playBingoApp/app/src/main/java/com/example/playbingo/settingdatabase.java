@@ -66,7 +66,7 @@ public class settingdatabase extends SQLiteOpenHelper {
     public String getsound()
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        String s ="";
+        String s ="off";
         String query = "SELECT * FROM "+DATABASE_TABLE;
         Cursor cursor = db.rawQuery(query,null);
         if(cursor.moveToFirst())
@@ -81,7 +81,7 @@ public class settingdatabase extends SQLiteOpenHelper {
     public String getVibrate()
     {
         SQLiteDatabase db = this.getReadableDatabase();
-        String s="";
+        String s="off";
         String query = "SELECT * FROM "+DATABASE_TABLE;
         Cursor cursor = db.rawQuery(query,null);
         if(cursor.moveToFirst())
