@@ -102,6 +102,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_main);
+
+
+
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.bringToFront();
@@ -130,10 +134,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent i = new Intent(MainActivity.this,RegisterActivity.class);
                 startActivity(i);
             }
-            final settingdatabase dbb = new settingdatabase(MainActivity.this);
 
-            if(dbb.getsound().equals("on"))
+            settingdatabase dbb = new settingdatabase(MainActivity.this);
+
+            if(dbb.getsound()!=null && dbb.getsound().equals("on"))
             {
+                Toast.makeText(MainActivity.this,"hii",Toast.LENGTH_LONG).show();
                 soundbool.setbool(true);
                 willPlay=true;
             }
@@ -142,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 soundbool.setbool(false);
                 willPlay=false;
             }
-            if (dbb.getVibrate().equals("on"))
+            if (dbb.getVibrate()!=null && dbb.getVibrate().equals("on"))
             {
                 vibratefreq.setvib(50);
                 vib =50;
@@ -344,6 +350,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             });
 
         }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if(TextUtils.isEmpty(username))
+        {
+            Intent i = new Intent(MainActivity.this,RegisterActivity.class);
+            startActivity(i);
+        }
+
+    }
 
     private void doit()
     {
@@ -683,7 +702,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if(item.getItemId()==R.id.nav_insta)
         {
-            Uri uri = Uri.parse("https://instagram.com/gouravgoel2701?igshid=p37k0fvlc2ij");
+            Uri uri = Uri.parse("https://instagram.com/playbingoforces?igshid=p37k0fvlc2ij");
             Intent i =new Intent(Intent.ACTION_VIEW,uri);
             startActivity(i);
         }
@@ -703,12 +722,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(item.getItemId()==R.id.nav_profile)
         {
             Intent i =new Intent(MainActivity.this,myprofile.class);
+            i.putExtra("username",username);
             startActivity(i);
         }
         if(item.getItemId()==R.id.nav_rating)
         {
-            Intent i =new Intent(MainActivity.this,rating.class);
-            startActivity(i);
         }
         if(item.getItemId()==R.id.nav_logout)
         {

@@ -59,7 +59,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                vibe.vibrate(vib);
                 Intent i= new Intent(LoginActivity.this,RegisterActivity.class);
                 startActivity(i);
             }
@@ -70,7 +69,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                vibe.vibrate(vib);
                 if (username.length() == 0) {
                     username.setError("Enter username: ");
                 } else if (password.length() == 0) {
@@ -144,6 +142,8 @@ public class LoginActivity extends AppCompatActivity {
             Intent i = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(i);
 
+            settingdatabase dbb = new settingdatabase(LoginActivity.this);
+            dbb.add();
         }
     };
     private Emitter.Listener onfailed = new Emitter.Listener() {

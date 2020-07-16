@@ -12,7 +12,6 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".rating"></activity>
         <activity android:name=".myprofile" />
         <activity
             android:name=".soundbool"
