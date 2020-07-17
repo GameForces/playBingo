@@ -7,11 +7,19 @@
     tools:context=".myprofile">
 
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Profile"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:textSize="70dp"/>
     <RelativeLayout
         android:id="@+id/user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
+        android:background="@drawable/tableborder"
         android:layout_centerInParent="true"
         >
         <RelativeLayout
@@ -78,7 +86,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:background="@drawable/tableborder"
+
             android:layout_below="@id/layoutmatchplayed"
             android:id="@+id/layoutrating"
             android:layout_width="300dp"
