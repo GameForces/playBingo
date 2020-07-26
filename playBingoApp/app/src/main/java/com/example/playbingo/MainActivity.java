@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -128,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             mSocket.connect();
             final UserDatabase db = new UserDatabase(MainActivity.this);
             username = db.getcurrentuser();
-
             if(TextUtils.isEmpty(username))
             {
                 Intent i = new Intent(MainActivity.this,RegisterActivity.class);
@@ -362,6 +362,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(i);
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+        System.exit(0);
     }
 
     private void doit()
@@ -677,8 +684,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         super.onOptionsItemSelected(item);
-
-
         return true;
     }
 
@@ -692,7 +697,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT, "hii friend! \n i am very exciting to invite you to play this newly play bingo game with me." +
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "hii friend! \n i am very excited to invite you to play this new playBingo game with me." +
                     "\n"+username+" is my username" );
             sendIntent.setType("text/plain");
 
@@ -708,15 +713,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         if(item.getItemId()==R.id.nav_fb)
         {
-            Uri uri = Uri.parse("https://facebook.com/");
+            Uri uri = Uri.parse("https://m.facebook.com/gourav.goel.9041?tsid=0.7139436374494297&source=result");
             Intent i =new Intent(Intent.ACTION_VIEW,uri);
             startActivity(i);
         }
         if(item.getItemId()==R.id.nav_email)
         {
-            Uri uri = Uri.parse("https://email.com/");
-            Intent i =new Intent(Intent.ACTION_VIEW,uri);
-            startActivity(i);
+            final Dialog dialog = new Dialog(MainActivity.this);
+            dialog.setContentView(R.layout.developerdialog);
+            dialog.setCanceledOnTouchOutside(false);
+
+            if(!((Activity) MainActivity.this).isFinishing()) {
+                dialog.show();
+            }
         }
 
         if(item.getItemId()==R.id.nav_profile)

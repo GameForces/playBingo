@@ -137,10 +137,6 @@ public class RegisterActivity extends AppCompatActivity {
             UserDatabase db = new UserDatabase(RegisterActivity.this);
             db.addUser(name,pass);
 
-
-            gamedatabase ddb = new gamedatabase(RegisterActivity.this);
-            ddb.add();
-
             settingdatabase dbb = new settingdatabase(RegisterActivity.this);
             dbb.add();
 
@@ -150,13 +146,6 @@ public class RegisterActivity extends AppCompatActivity {
             LayoutInflater inflater = getLayoutInflater();
             View layout = inflater.inflate(R.layout.custum_toast, null);
             TextView text = (TextView) layout.findViewById(R.id.meage);
-
-            text.setText("Welcome "+username);
-            Toast toast = new Toast(RegisterActivity.this);
-            toast.setDuration(Toast.LENGTH_SHORT);
-            toast.setView(layout);
-            toast.show();
-
         }
     };
     private Emitter.Listener onDuplicate = new Emitter.Listener() {
